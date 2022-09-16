@@ -12,5 +12,6 @@ public class TestClass {
         System.out.println("Total Mints = " + totalMints);
         System.out.println("Number of Bags = " + numberOfBags);
         System.out.println("Mints Leftover = " + mintsLeftOver);
+        int z = 4; 
     }
 }

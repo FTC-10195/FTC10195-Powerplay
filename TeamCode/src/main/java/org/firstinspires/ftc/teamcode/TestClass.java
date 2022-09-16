@@ -5,5 +5,6 @@ public class TestClass {
         System.out.println("Hello");
         int x = 5;
         org.firstinspires.ftc.teamcode.TestClass();
+        int y = 2;
     }
 }

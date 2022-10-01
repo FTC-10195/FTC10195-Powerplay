@@ -15,7 +15,6 @@ public class AltijaniTeleOp extends LinearOpMode {
         DcMotor motorBackLeft = hardwareMap.dcMotor.get("bl"); //reverse this
         DcMotor motorFrontRight = hardwareMap.dcMotor.get("fr");
         DcMotor motorBackRight = hardwareMap.dcMotor.get("br"); //reverse
-
         // Reverse the right side motors
         // Reverse left motors if you are using NeveRests
         motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);

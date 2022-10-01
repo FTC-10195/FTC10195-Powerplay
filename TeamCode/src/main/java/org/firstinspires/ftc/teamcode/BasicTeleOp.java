@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp
-public class AltijaniTeleOp extends LinearOpMode {
+public class BasicTeleOp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // Declare our motors

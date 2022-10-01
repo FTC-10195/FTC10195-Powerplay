@@ -14,7 +14,7 @@ public class LinearSlideTest extends LinearOpMode {
         while (opModeIsActive()) {                  //Controls movement
             boolean y = gamepad1.right_bumper;
             if (y) {
-                ls.setPower(1);
+                ls.setPower(1); //continue this later
             }
             telemetry.addData("Encoder Value", ls.getCurrentPosition());
             telemetry.update();

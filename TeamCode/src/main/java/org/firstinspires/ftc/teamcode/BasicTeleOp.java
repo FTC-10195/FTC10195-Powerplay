@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -21,6 +23,13 @@ public class BasicTeleOp extends LinearOpMode {
         // Reverse left motors if you are using NeveRests
         motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        DcMotor.ZeroPowerBehavior zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE;
+        motorBackRight.setZeroPowerBehavior(zeroPowerBehavior);
+        motorBackLeft.setZeroPowerBehavior(zeroPowerBehavior);
+        motorFrontRight.setZeroPowerBehavior(zeroPowerBehavior);
+        motorFrontLeft.setZeroPowerBehavior(zeroPowerBehavior);
+
 
         waitForStart();
 

@@ -16,19 +16,25 @@ public class Clawbprac extends LinearOpMode{
 
         Servo clawServo = hardwareMap.servo.get("clawOne");
         double ServoPos = 0.5;
-        Gamepad previousGamepad = new Gamepad();
+        boolean previousLeftBumper = false, previousRightBumper = false;
+
         waitForStart();
 
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
-          if(gamepad1.right_bumper && !previousGamepad.right_bumper) {
+          if(gamepad1.right_bumper && !previousRightBumper) {
               ServoPos += 0.05;
           }
-          if(gamepad1.left_bumper && !previousGamepad.left_bumper) {
-              ServoPos += -0.05;
+          if(gamepad1.left_bumper && !previousLeftBumper) {
+              ServoPos -= 0.05;
           }
-          previousGamepad = gamepad1;
+            previousRightBumper = gamepad1.right_bumper;
+            previousLeftBumper  = gamepad1.left_bumper;
+          clawServo.setPosition(ServoPos);
+
+          telemetry.addData("servoPos", ServoPos);
+          telemetry.update();
         }
     }
 }

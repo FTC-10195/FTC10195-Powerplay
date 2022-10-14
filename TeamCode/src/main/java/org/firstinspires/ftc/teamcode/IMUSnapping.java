@@ -42,10 +42,71 @@ public class IMUSnapping extends LinearOpMode {
         }
 
         waitForStart(); //wait for start button
-        sleep(1000); //unnecessary? Check later
 
-        while (opModeIsActive()) {
-            //insert button here
-        }
+    }
+
+    private void resetAngle() { //reset IMU tracking
+        lastAngles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+        globalAngle = 0;
+    }
+
+    private double getAngle() { //calculates the cumulative angle rotation since start
+
+        Orientation angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+        double deltaAngle = angles.firstAngle - lastAngles.firstAngle;
+
+        if (deltaAngle < -180)
+            deltaAngle += 360;
+        else if (deltaAngle > 180)
+            deltaAngle -= 360;
+
+        globalAngle += deltaAngle;
+
+        lastAngles = angles;
+
+        return globalAngle;
+    }
+
+    private void rotate(int degrees, double power) {
+        double leftPower, rightPower;
+
+        // restart imu movement tracking.
+        resetAngle();
+
+        // getAngle() returns + when rotating counter clockwise (left) and - when rotating
+        // clockwise (right).
+
+        if (degrees < 0) {   // turn right.
+            leftPower = power;
+            rightPower = -power;
+        } else if (degrees > 0) {   // turn left.
+            leftPower = -power;
+            rightPower = power;
+        } else return;
+
+        // set power to rotate.
+        leftMotor.setPower(leftPower);
+        rightMotor.setPower(rightPower);
+
+        // rotate until turn is completed.
+        if (degrees < 0) {
+            // On right turn we have to get off zero first.
+            while (opModeIsActive() && getAngle() == 0) {
+            }
+
+            while (opModeIsActive() && getAngle() > degrees) {
+            }
+        } else    // left turn.
+            while (opModeIsActive() && getAngle() < degrees) {
+            }
+
+        // turn the motors off.
+        rightMotor.setPower(0);
+        leftMotor.setPower(0);
+
+        // reset angle tracking on new heading.
+        resetAngle();
     }
 }

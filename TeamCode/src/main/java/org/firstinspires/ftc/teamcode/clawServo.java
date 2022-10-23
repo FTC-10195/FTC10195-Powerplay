@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class clawServo extends LinearOpMode {
-    private final double OPEN_CLAW = 0;
-    private final double CLOSED_CLAW = 1;
+    private final double OPEN_CLAW = .8;
+    private final double CLOSED_CLAW = .60;
     public void runOpMode() throws InterruptedException {
         Servo clawServo = hardwareMap.servo.get("claw");
         waitForStart();

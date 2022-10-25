@@ -17,22 +17,57 @@ public class LinearSlideTest extends LinearOpMode {
         linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        int currentPosition;
+        //TODO TUNE THESE VALUES
+        final int TALL_POLE = 0;
+        final int MEDIUM_POLE = 0;
+        final int SHORT_POLE = 0;
+
         waitForStart();
+
         while (opModeIsActive()) {                  //Controls movement
-            boolean y = gamepad1.right_bumper;
-            boolean x = gamepad1.left_bumper;
-            if (y) {
+            currentPosition = linearSlide.getCurrentPosition();
+            if (gamepad1.left_bumper) {
                 linearSlide.setPower(1);
             }
-            if (x) {
+            if (gamepad1.right_bumper) {
                 linearSlide.setPower(-1);
             }
 
-            if(gamepad1.b) {
+            if (gamepad1.b) {
                 linearSlide.setMotorDisable();
             }
-            telemetry.addData("Encoder Value", linearSlide.getCurrentPosition());
+            if (gamepad1.dpad_up) {
+                do {
+                    linearSlide.setTargetPosition(-3000);
+                    linearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    linearSlide.setPower(1);
+                    linearSlide.setTargetPositionTolerance(25);
+                    currentPosition = linearSlide.getCurrentPosition();
+                }while(currentPosition > -3000);
+                linearSlide.setTargetPosition(0);
+                linearSlide.setPower(1);
+
+            }
+
+            //TODO max position according to v1 scrim bot, any higher and the linear slide breaks
+            //TODO assign variables to positions once tuned
+            if(gamepad1.dpad_right) {
+                do {
+                    linearSlide.setTargetPosition(-5600);
+                    linearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    linearSlide.setPower(1);
+                    linearSlide.setTargetPositionTolerance(25);
+                    currentPosition = linearSlide.getCurrentPosition();
+                } while (currentPosition > -5600);
+                linearSlide.setTargetPosition(0);
+                linearSlide.setPower(1);
+            }
+            telemetry.addData("Encoder Value", currentPosition);
             telemetry.update();
+
         }
+
     }
+
 }

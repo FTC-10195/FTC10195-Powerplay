@@ -4,13 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 //TODO max position according to v1 scrim bot, any higher and the linear slide breaks- around negative 5760
 //TODO assign variables to positions once tuned
 
 @TeleOp
-public class LinearSlideTest extends LinearOpMode {
+public class LinearSlideTestNoWHile extends LinearOpMode {
     public static DcMotorEx linearSlide; //defines motor
     int currentPosition;
     //TODO TUNE THESE VALUES
@@ -65,20 +64,20 @@ public class LinearSlideTest extends LinearOpMode {
 
 
     public void position(int pole) {
-        do{
-            linearSlide.setTargetPosition(pole);
-            linearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            linearSlide.setPower(1);
-            linearSlide.setTargetPositionTolerance(25);
-            currentPosition = linearSlide.getCurrentPosition();
-            telemetry.addData("Encoder Value", currentPosition);
-            telemetry.update();
-        } while (currentPosition > pole);
-        linearSlide.setTargetPosition(0);
+        linearSlide.setTargetPosition(pole);
+        linearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         linearSlide.setPower(1);
-        telemetry.addData("Encoder Value", currentPosition);
-        telemetry.update();
-
+        linearSlide.setTargetPositionTolerance(25);
+        currentPosition = linearSlide.getCurrentPosition();
+        if (currentPosition <= pole) {
+            resetSlides();
+        }
     }
 
+    public void resetSlides() {
+        linearSlide.setTargetPosition(0);
+        linearSlide.setPower(1);
+    }
 }
+
+

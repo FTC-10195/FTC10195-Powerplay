@@ -1,27 +1,27 @@
 package org.firstinspires.ftc.teamcode;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class clawServo extends LinearOpMode {
-    private final double OPEN_CLAW = .8;
-    private final double CLOSED_CLAW = .60;
-    public void runOpMode() throws InterruptedException {
-        Servo clawServo = hardwareMap.servo.get("claw");
-        waitForStart();
-        if (isStopRequested()) return;
-        while (opModeIsActive()) {
+public class clawServo {
+    public final double OPEN_CLAW = .8;
+    public final double CLOSED_CLAW = .60;
 
-            if(gamepad2.a == true) {
+    public void claw(boolean buttonPressed) {
+        Servo clawServo = hardwareMap.servo.get("claw");
+            if(gamepad2.a) {
                 clawServo.setPosition(OPEN_CLAW);
             }
 
-            if(gamepad2.x == true) {
+            if(gamepad2.x) {
                 clawServo.setPosition(CLOSED_CLAW);
             }
         }
 
 
     }
-}
+

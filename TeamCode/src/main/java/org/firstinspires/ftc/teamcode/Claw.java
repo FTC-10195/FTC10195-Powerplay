@@ -5,19 +5,27 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.har
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class clawServo {
+
+public class Claw {
+
+    public Servo clawServo;
+
+
+    public Claw(HardwareMap hwmap) {
+        clawServo = hwmap.get(Servo.class, "clawServo");
+    }
     public final double OPEN_CLAW = .8;
     public final double CLOSED_CLAW = .60;
+    public void claw(boolean openButton, boolean closedButton) {
 
-    public void claw(boolean buttonPressed) {
-        Servo clawServo = hardwareMap.servo.get("claw");
-            if(gamepad2.a) {
+            if(openButton) {
                 clawServo.setPosition(OPEN_CLAW);
             }
 
-            if(gamepad2.x) {
+            if(closedButton) {
                 clawServo.setPosition(CLOSED_CLAW);
             }
         }

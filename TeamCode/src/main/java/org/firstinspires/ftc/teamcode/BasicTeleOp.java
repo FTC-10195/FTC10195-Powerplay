@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
-import org.firstinspires.ftc.teamcode.clawServo;
+import org.firstinspires.ftc.teamcode.Claw;
 
 @TeleOp
 public class BasicTeleOp extends LinearOpMode {
@@ -24,7 +24,8 @@ public class BasicTeleOp extends LinearOpMode {
         DcMotor motorBackRight = hardwareMap.dcMotor.get("br"); //reverse
         //servo
         Servo clawServo = hardwareMap.servo.get("claw");
-
+        //for debugging claw
+       // clawServo.setPosition(1);
 
         // Reverse the right side motors
         // Reverse left motors if you are using NeveRests
@@ -40,13 +41,14 @@ public class BasicTeleOp extends LinearOpMode {
 
 
 
-        clawServo clawServo1 = new clawServo();
+        Claw claw = new Claw(hardwareMap);
         waitForStart();
 
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
-            clawServo1.claw(gamepad2.a || gamepad2.x);
+
+            claw.claw(gamepad2.a, gamepad2.x);
 
             double y = gamepad1.left_stick_y; // Remember, this is reversed!
             double x =-gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing

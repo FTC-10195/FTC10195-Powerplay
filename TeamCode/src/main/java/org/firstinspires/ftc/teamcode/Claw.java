@@ -19,7 +19,7 @@ public class Claw {
     }
     public final double OPEN_CLAW = .8;
     public final double CLOSED_CLAW = .60;
-    public void claw(boolean openButton, boolean closedButton) {
+    public void intake(boolean openButton, boolean closedButton) {
 
             if(openButton) {
                 clawServo.setPosition(OPEN_CLAW);

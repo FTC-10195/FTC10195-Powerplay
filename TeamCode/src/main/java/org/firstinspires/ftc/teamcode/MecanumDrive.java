@@ -33,13 +33,18 @@ public class MecanumDrive  {
         motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
       //TODO THIS MOTOR NEEDS TO BE REVERSED ON THE MAIN ROBOT, UNCOMMENT LINE WHEN WORKING ON MAIN ROBOT//
-          motorBackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+         // motorBackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         DcMotor.ZeroPowerBehavior zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE;
         motorBackRight.setZeroPowerBehavior(zeroPowerBehavior);
         motorBackLeft.setZeroPowerBehavior(zeroPowerBehavior);
         motorFrontRight.setZeroPowerBehavior(zeroPowerBehavior);
         motorFrontLeft.setZeroPowerBehavior(zeroPowerBehavior);
+
+         motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+         motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+         motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+         motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         /*   // Declare our motors
         // Make sure your ID's match your configuration
         DcMotor motorFrontLeft = hardwareMap.dcMotor.get("fl");

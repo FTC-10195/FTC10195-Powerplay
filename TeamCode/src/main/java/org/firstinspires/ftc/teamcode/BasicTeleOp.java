@@ -16,6 +16,7 @@ public class BasicTeleOp extends LinearOpMode {
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
+            claw.intake(gamepad1.a, gamepad1.x);
             claw.intake(gamepad2.a, gamepad2.x);
             mecanumDrive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
             if(gamepad2.dpad_down) {claw.intake(false, true);}

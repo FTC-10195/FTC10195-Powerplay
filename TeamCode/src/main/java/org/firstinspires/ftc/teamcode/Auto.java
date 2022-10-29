@@ -27,6 +27,7 @@ public class Auto extends LinearOpMode {
         motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -37,10 +38,58 @@ public class Auto extends LinearOpMode {
 
         if (isStopRequested()) return;
         while (opModeIsActive()) {
-            motorBackRight.setTargetPosition(400);
-            telemetry.addData("Working", "YAY");
+
+            //TODO EITHER TUNE THIS FOR A PRELOAD DELIVERY OR PARK AND STOP OR IF COLOR SENSOR WORKS DO THAT
+            int endForward = forward(1000);
+            if(endForward ==1)  {
+                right(1000); }
+            telemetry.addData("Encoder Position", motorBackRight.getCurrentPosition());
             telemetry.update();
 
         }
     }
+
+
+
+    public int forward(int distance) {
+
+        motorBackRight.setTargetPosition(distance);
+        motorBackLeft.setTargetPosition(distance);
+        motorFrontRight.setTargetPosition(distance);
+        motorFrontLeft.setTargetPosition(distance);
+
+        motorBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        motorBackRight.setPower(1);
+        motorBackLeft.setPower(1);
+        motorFrontRight.setPower(1);
+        motorFrontLeft.setPower(1);
+
+        return 1;
+
+    }
+    public void right(int distance) {
+
+        motorBackRight.setTargetPosition(-distance);
+        motorBackLeft.setTargetPosition(distance);
+        motorFrontRight.setTargetPosition(-distance);
+        motorFrontLeft.setTargetPosition(distance);
+
+        motorBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        motorBackRight.setPower(1);
+        motorBackLeft.setPower(1);
+        motorFrontRight.setPower(1);
+        motorFrontLeft.setPower(1);
+
+
+
+    }
 }
+

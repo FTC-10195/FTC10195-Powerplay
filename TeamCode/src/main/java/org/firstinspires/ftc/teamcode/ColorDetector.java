@@ -3,19 +3,19 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import java.lang.*;
 
+//TODO FIGURE OUT IN THE CAR
 
 public class ColorDetector {
-    public static ColorSensor colorSensor;
+    public static ColorSensor sensor;
 
     public ColorDetector(HardwareMap hwMap) {
-        colorSensor = hwMap.get(ColorSensor.class, "ColorDetector");
-        colorSensor.enableLed(true);
+        sensor = hwMap.get(ColorSensor.class, "ColorDetector");
+        sensor.enableLed(true);
     }
 
-    int r = colorSensor.red();
-    int g = colorSensor.green();
-    int b = colorSensor.blue();
-
+    int r = sensor.red();
+    int g = sensor.green();
+    int b = sensor.blue();
     int idealpinkr = 0; //placeholder
     int idealpinkg = 0; //placeholder
     int idealpinkb = 0; //placeholder

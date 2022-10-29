@@ -17,6 +17,7 @@ public class Claw {
     public Claw(HardwareMap hwmap) {
         clawServo = hwmap.get(Servo.class, "clawServo");
     }
+    //TODO CHANGE THESE VALUES TO BE BETTER
     public final double OPEN_CLAW = .6;
     public final double CLOSED_CLAW = .80;
     public void intake(boolean openButton, boolean closedButton) {

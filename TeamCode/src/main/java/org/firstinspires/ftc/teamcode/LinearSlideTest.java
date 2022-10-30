@@ -15,8 +15,8 @@ public class LinearSlideTest extends LinearOpMode {
     int currentPosition;
     //TODO TUNE THESE VALUES
     public static int TALL_POLE = 0;
-    public static int MEDIUM_POLE = 0;
-    public static int SHORT_POLE = 0;
+    public static int MEDIUM_POLE = -7397;
+    public static int SHORT_POLE = -4634;
     public static int MAX_VALUE_V1 = -6510;
 
     @Override

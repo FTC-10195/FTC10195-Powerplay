@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -44,6 +46,23 @@ public void slideMovement(boolean up, boolean down, boolean left, boolean right)
             }
         }
 
+        public void manualMove(double leftTrigger, double rightTrigger, boolean stop) {
+
+        if(leftTrigger > 0.1) {
+            linearSlide.setPower(leftTrigger);
+        }
+          else if(rightTrigger > 0.1) {
+            linearSlide.setPower(-rightTrigger);
+        }
+          else {
+              linearSlide.setMotorDisable();
+        }
+
+            if(stop) {
+                linearSlide.setMotorDisable();
+            }
+
+        }
 
 
 
@@ -61,6 +80,10 @@ public void slideMovement(boolean up, boolean down, boolean left, boolean right)
     public void resetSlides() {
         linearSlide.setTargetPosition(0);
         linearSlide.setPower(1);
+    }
+    public void stop() {
+        linearSlide.setMotorDisable();
+        linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }
 

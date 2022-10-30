@@ -20,7 +20,8 @@ public class BasicTeleOp extends LinearOpMode {
             claw.intake(gamepad2.a, gamepad2.x);
             mecanumDrive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
             if(gamepad2.dpad_down) {claw.intake(false, true);}
-            linearSlide.slideMovement(gamepad2.dpad_up, gamepad2.dpad_down, gamepad2.dpad_left, gamepad2.dpad_right);
+            linearSlide.slideMovement(gamepad1.dpad_up, gamepad1.dpad_down, gamepad1.dpad_left, gamepad1.dpad_right);
+            linearSlide.manualMove(gamepad1.left_trigger,gamepad1.right_trigger, gamepad1.b);
 
     }
 }

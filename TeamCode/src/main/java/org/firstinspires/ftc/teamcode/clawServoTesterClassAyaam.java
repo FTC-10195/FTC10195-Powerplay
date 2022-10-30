@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.annotation.SuppressLint;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -7,6 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp
 public class clawServoTesterClassAyaam extends LinearOpMode {
 
+    @SuppressLint("SuspiciousIndentation")
     @Override
     public void runOpMode() throws InterruptedException {
 

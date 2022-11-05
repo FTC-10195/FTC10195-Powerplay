@@ -31,9 +31,9 @@ public class MecanumDrive  {
         // Reverse the right side motors
         // Reverse left motors if you are using NeveRests
         motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
+    //    motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
       //TODO THIS MOTOR NEEDS TO BE REVERSED ON THE MAIN ROBOT, UNCOMMENT LINE WHEN WORKING ON MAIN ROBOT//
-         // motorBackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+          motorBackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         DcMotor.ZeroPowerBehavior zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE;
         motorBackRight.setZeroPowerBehavior(zeroPowerBehavior);
@@ -68,8 +68,8 @@ public class MecanumDrive  {
 
 public void drive(double upDown, double strafe, double turn) {
              upDown = -upDown; // Remember, this is reversed!
-             strafe =-strafe * 1.1; // Counteract imperfect strafing
-             turn =-turn;
+             strafe =strafe * 1.1; // Counteract imperfect strafing
+             turn =turn;
 
 
             // Denominator is the largest motor power (absolute value) or 1

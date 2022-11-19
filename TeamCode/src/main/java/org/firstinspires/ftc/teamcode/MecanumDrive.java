@@ -68,7 +68,7 @@ public class MecanumDrive  {
 
 public void drive(double upDown, double strafe, double turn) {
              upDown = -upDown; // Remember, this is reversed!
-             strafe =-strafe * 1.1; // Counteract imperfect strafing
+             strafe = strafe * 1.1; // Counteract imperfect strafing
              turn =-turn;
 
 

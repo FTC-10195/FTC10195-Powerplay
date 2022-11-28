@@ -59,20 +59,19 @@ public class AutoUseThis extends LinearOpMode {
 
 
         if (isStopRequested()) return;
+
         if (opModeIsActive()) {
             br = motorBackRight.getCurrentPosition();
             bl = motorBackLeft.getCurrentPosition();
             fr = motorFrontRight.getCurrentPosition();
             fl = motorFrontLeft.getCurrentPosition();
             //TODO scrim is cursed i hate it here
-
             forward(1000);
             telemetry.addData("motorBackRight", br);
             telemetry.addData("motorBackLeft", bl);
             telemetry.addData("motorFrontRight", fr);
             telemetry.addData("motorFrontLeft", fl);
             telemetry.update();
-            sleep(18000);
             strafeRight(1000);
             telemetry.addData("motorBackRight", br);
             telemetry.addData("motorBackLeft", bl);

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Subsystems;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
@@ -20,6 +20,7 @@ public class Claw {
     //TODO CHANGE THESE VALUES TO BE BETTER
     public final double OPEN_CLAW = .5;
     public final double CLOSED_CLAW = 1;
+
     public void intake(boolean openButton, boolean closedButton) {
 
             if(openButton) {

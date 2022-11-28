@@ -6,6 +6,7 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gam
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -19,6 +20,8 @@ public class MecanumDrive  {
     DcMotor motorBackLeft;
     DcMotor motorFrontRight;
     DcMotor motorBackRight;
+    BNO055IMU imu;
+
 
     //hardware mapping function- constructor of the class
     public MecanumDrive(HardwareMap hwmap) {
@@ -34,6 +37,13 @@ public class MecanumDrive  {
     //    motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
       //TODO THIS MOTOR NEEDS TO BE REVERSED ON THE MAIN ROBOT, UNCOMMENT LINE WHEN WORKING ON MAIN ROBOT//
           motorBackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        // Retrieve the IMU from the hardware map
+        imu = hwmap.get(BNO055IMU.class, "imu");
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        // Technically this is the default, however specifying it is clearer
+        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+        // Without this, data retrieving from the IMU throws an exception
+        imu.initialize(parameters);
 
         DcMotor.ZeroPowerBehavior zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE;
         motorBackRight.setZeroPowerBehavior(zeroPowerBehavior);
@@ -72,12 +82,15 @@ public void drive(double upDown, double strafe, double turn) {
              turn =-turn;
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio, but only when
-            // at least one is out of the range [-1, 1]
-            double denominator = Math.max(Math.abs(upDown) + Math.abs(strafe) + Math.abs(turn), 1);
-            double frontLeftPower = (upDown + strafe + turn) / denominator;
-            double backLeftPower = (upDown - strafe + turn) / denominator;
-            double frontRightPower = (upDown - strafe - turn) / denominator;
-            double backRightPower = (upDown + strafe - turn) / denominator;
+    double botHeading = -imu.getAngularOrientation().firstAngle;
+    double rotX = strafe * Math.cos(botHeading) - upDown * Math.sin(botHeading);
+    double rotY = strafe * Math.sin(botHeading) + upDown * Math.cos(botHeading);
+
+    double denominator = Math.max(Math.abs(upDown) + Math.abs(strafe) + Math.abs(turn), 1);
+    double frontLeftPower = (rotY + rotX + turn) / denominator;
+    double backLeftPower = (rotY - rotX + turn) / denominator;
+    double frontRightPower = (rotY - rotX - turn) / denominator;
+    double backRightPower = (rotY + rotX - turn) / denominator;
 
             motorFrontLeft.setPower(frontLeftPower);
             motorBackLeft.setPower(backLeftPower);

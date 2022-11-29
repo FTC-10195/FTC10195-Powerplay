@@ -3,6 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Subsystems.VirtualServo;
 
 @TeleOp
@@ -12,7 +13,7 @@ public class BasicTeleOp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap);
+        MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, telemetry);
         waitForStart();
 
         if (isStopRequested()) return;

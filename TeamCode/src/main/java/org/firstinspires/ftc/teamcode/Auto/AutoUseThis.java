@@ -60,32 +60,27 @@ public class AutoUseThis extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-        if (opModeIsActive()) {
             br = motorBackRight.getCurrentPosition();
             bl = motorBackLeft.getCurrentPosition();
             fr = motorFrontRight.getCurrentPosition();
             fl = motorFrontLeft.getCurrentPosition();
             //TODO scrim is cursed i hate it here
             forward(1000);
-            telemetry.addData("motorBackRight", br);
-            telemetry.addData("motorBackLeft", bl);
-            telemetry.addData("motorFrontRight", fr);
-            telemetry.addData("motorFrontLeft", fl);
-            telemetry.update();
             strafeRight(1000);
-            telemetry.addData("motorBackRight", br);
-            telemetry.addData("motorBackLeft", bl);
-            telemetry.addData("motorFrontRight", fr);
-            telemetry.addData("motorFrontLeft", fl);
-            telemetry.update();
+
         }
-    }
+
 
 
     public void forward(int distance) {
 
 
-            motorBackRight.setTargetPosition(distance);
+        motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        motorBackRight.setTargetPosition(distance);
             motorBackLeft.setTargetPosition(distance);
             motorFrontRight.setTargetPosition(distance);
             motorFrontLeft.setTargetPosition(distance);
@@ -100,11 +95,13 @@ public class AutoUseThis extends LinearOpMode {
             motorFrontRight.setPower(.1);
             motorFrontLeft.setPower(.1);
 
-            while(!motorBackLeft.isBusy() && !motorBackRight.isBusy() && !motorFrontLeft.isBusy() && !motorFrontRight.isBusy()){}
+            while(motorBackLeft.isBusy() && motorBackRight.isBusy() && motorFrontLeft.isBusy() && motorFrontRight.isBusy()){}
                 motorBackRight.setPower(0);
                 motorBackLeft.setPower(0);
                 motorFrontRight.setPower(0);
                 motorFrontLeft.setPower(0);
+
+
     }
 
 
@@ -134,14 +131,13 @@ public class AutoUseThis extends LinearOpMode {
             motorBackLeft.setPower(1);
             motorFrontRight.setPower(1);
             motorFrontLeft.setPower(1);
-        while(!motorBackLeft.isBusy() && !motorBackRight.isBusy() && !motorFrontLeft.isBusy() && !motorFrontRight.isBusy()){}
+
+
+       while(motorBackLeft.isBusy() && motorBackRight.isBusy() && motorFrontLeft.isBusy() && motorFrontRight.isBusy()){}
         motorBackRight.setPower(0);
         motorBackLeft.setPower(0);
         motorFrontRight.setPower(0);
         motorFrontLeft.setPower(0);
-
-
-
     }
 
 

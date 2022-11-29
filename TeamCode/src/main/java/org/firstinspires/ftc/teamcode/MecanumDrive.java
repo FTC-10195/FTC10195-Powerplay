@@ -5,6 +5,7 @@ import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -13,18 +14,19 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 
 public class MecanumDrive  {
-    DcMotor motorFrontLeft;
-    DcMotor motorBackLeft;
-    DcMotor motorFrontRight;
-    DcMotor motorBackRight;
+   public DcMotor motorFrontLeft;
+  public  DcMotor motorBackLeft;
+  public  DcMotor motorFrontRight;
+  public  DcMotor motorBackRight;
     BNO055IMU imu;
 
 
     //hardware mapping function- constructor of the class
-    public MecanumDrive(HardwareMap hwmap) {
+    public MecanumDrive(HardwareMap hwmap, Telemetry telemetry1) {
         // Declare our motors
         // Make sure your ID's match your configuration
          motorFrontLeft = hwmap.dcMotor.get("fl");
@@ -33,10 +35,14 @@ public class MecanumDrive  {
          motorBackRight = hwmap.dcMotor.get("br"); //reverse
         // Reverse the right side motors
         // Reverse left motors if you are using NeveRests
-        motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+       // motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
     //    motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
       //TODO THIS MOTOR NEEDS TO BE REVERSED ON THE MAIN ROBOT, UNCOMMENT LINE WHEN WORKING ON MAIN ROBOT//
-          motorBackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+   //    motorFrontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+       //   motorBackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
+          motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
+          motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         // Retrieve the IMU from the hardware map
         imu = hwmap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -73,6 +79,7 @@ public class MecanumDrive  {
         motorFrontRight.setZeroPowerBehavior(zeroPowerBehavior);
         motorFrontLeft.setZeroPowerBehavior(zeroPowerBehavior);
 */
+        telemetry = telemetry1;
     }
 
 
@@ -86,7 +93,7 @@ public void drive(double upDown, double strafe, double turn) {
     double rotX = strafe * Math.cos(botHeading) - upDown * Math.sin(botHeading);
     double rotY = strafe * Math.sin(botHeading) + upDown * Math.cos(botHeading);
 
-    double denominator = Math.max(Math.abs(upDown) + Math.abs(strafe) + Math.abs(turn), 1);
+    double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(turn), 1);
     double frontLeftPower = (rotY + rotX + turn) / denominator;
     double backLeftPower = (rotY - rotX + turn) / denominator;
     double frontRightPower = (rotY - rotX - turn) / denominator;
@@ -96,6 +103,19 @@ public void drive(double upDown, double strafe, double turn) {
             motorBackLeft.setPower(backLeftPower);
             motorFrontRight.setPower(frontRightPower);
             motorBackRight.setPower(backRightPower);
+
+            telemetry.addData("rotx", rotX);
+    telemetry.addData("roty", rotY);
+    telemetry.addData("frontleft", frontLeftPower);
+    telemetry.addData("backleft", backLeftPower);
+    telemetry.addData("backright", backRightPower);
+    telemetry.addData("frontright", frontRightPower);
+    telemetry.addData("heading", botHeading);
+    telemetry.update();
+
+
+
+
 
             /*  double y = gamepad1.left_stick_y; // Remember, this is reversed!
             double x =-gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing

@@ -1,4 +1,8 @@
-package org.firstinspires.ftc.teamcode.Auto;
+//Legacy Auto, for archive purposes only
+
+
+
+/*package org.firstinspires.ftc.teamcode.Auto;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
@@ -110,3 +114,4 @@ public class Auto extends LinearOpMode {
 
 }
 
+*/

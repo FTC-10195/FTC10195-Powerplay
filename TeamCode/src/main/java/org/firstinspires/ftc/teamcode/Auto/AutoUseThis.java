@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Auto;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
+import android.annotation.SuppressLint;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -22,6 +24,7 @@ public class AutoUseThis extends LinearOpMode {
     int fl = 0;
     ;
 
+    @SuppressLint("SuspiciousIndentation")
     @Override
     public void runOpMode() throws InterruptedException {
         motorFrontLeft = hardwareMap.dcMotor.get("fl");
@@ -60,11 +63,11 @@ public class AutoUseThis extends LinearOpMode {
 
         if (isStopRequested()) return;
 
+
             br = motorBackRight.getCurrentPosition();
             bl = motorBackLeft.getCurrentPosition();
             fr = motorFrontRight.getCurrentPosition();
             fl = motorFrontLeft.getCurrentPosition();
-            //TODO scrim is cursed i hate it here
             forward(1000);
             strafeRight(1000);
 

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Tests.Scrimbot;
+package org.firstinspires.ftc.teamcode.Tests.MainBot;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;

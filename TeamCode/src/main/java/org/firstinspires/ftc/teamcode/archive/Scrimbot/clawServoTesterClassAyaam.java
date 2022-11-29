@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Tests.Scrimbot;
+/*package org.firstinspires.ftc.teamcode.archive.Scrimbot;
 
 import android.annotation.SuppressLint;
 
@@ -47,7 +47,7 @@ public class clawServoTesterClassAyaam extends LinearOpMode {
             }
         }
     }
-
+*/
 
 
 

@@ -1,14 +1,12 @@
-package org.firstinspires.ftc.teamcode.Tests;
+package org.firstinspires.ftc.teamcode.Tests.MainBot;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.Subsystems.MecanumDrive;
 @TeleOp
-public class roadrunner extends LinearOpMode {
+public class IndividualMotorsTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         MecanumDrive dt = new MecanumDrive(hardwareMap, telemetry);

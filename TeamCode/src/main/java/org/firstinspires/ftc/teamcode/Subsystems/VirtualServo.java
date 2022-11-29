@@ -16,6 +16,7 @@ public class VirtualServo {
     public VirtualServo(HardwareMap hwmap) {
         rollerServo = hwmap.get(CRServoImplEx.class, "rollerServo");
     }
+
     //TODO CHANGE THESE VALUES TO BE BETTER
     public void rollerRotate(boolean a) {
         rollerServo.setPower(1);

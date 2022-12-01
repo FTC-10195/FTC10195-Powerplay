@@ -18,11 +18,11 @@ public class AutoUseThis extends LinearOpMode {
     DcMotor motorBackLeft;
     DcMotor motorFrontRight;
     DcMotor motorBackRight;
-    int br = 0;
-    int bl = 0;
-    int fr = 0;
-    int fl = 0;
-    ;
+    int br;
+    int bl;
+    int fr;
+    int fl;
+
 
     @SuppressLint("SuspiciousIndentation")
     @Override
@@ -52,11 +52,6 @@ public class AutoUseThis extends LinearOpMode {
         motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        int br = motorBackRight.getCurrentPosition();
-        int bl = motorBackLeft.getCurrentPosition();
-        int fr = motorFrontRight.getCurrentPosition();
-        int fl = motorFrontLeft.getCurrentPosition();
 
         waitForStart();
 

@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.teamcode.Subsystems.Claw;
+
 //TODO max position according to v1 scrim bot, any higher and the linear slide breaks- around negative 5760
 //TODO assign variables to positions once tuned
 
@@ -18,7 +20,7 @@ public class LinearSlideTest extends LinearOpMode {
     public static int MEDIUM_POLE = -7397;
     public static int SHORT_POLE = -4634;
     public static int MAX_VALUE_V1 = -6510;
-
+    Claw claw = new Claw(hardwareMap);
     @Override
     public void runOpMode() throws InterruptedException {
         linearSlide = hardwareMap.get(DcMotorEx.class, "linearSlide"); //Sets motor

@@ -40,11 +40,13 @@ public class clawServoTesterClassAyaam extends LinearOpMode {
 
             if (gamepad1.right_bumper && !previousRightBumper) {
                 clawServo1Position += .05;
+                clawServo2Position += .05;
 
             }
 
             if (gamepad1.left_bumper && !previousLeftBumper) {
                 clawServo1Position -= .05;
+                clawServo2Position -= .05;
             }
 
 

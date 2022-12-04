@@ -12,15 +12,18 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Claw {
 
     public Servo clawServo1;
+    public Servo clawServo2;
 
 
     public Claw(HardwareMap hwmap) {
-        clawServo1 = hwmap.get(Servo.class, "clawServo1");
+
+        clawServo1 = hwmap.get(Servo.class, "clawOne");
+        clawServo2 = hwmap.get(Servo.class, "clawTwo");
     }
 
     //TODO CHANGE THESE VALUES TO BE BETTER
-    public final double OPEN_CLAW = .5;
-    public final double CLOSED_CLAW = 1;
+    public final double OPEN_CLAW = 0;
+    public final double CLOSED_CLAW = .28;
 
     public enum ClawState {
         OPEN,
@@ -33,12 +36,14 @@ public class Claw {
         switch (clawState) {
             case OPEN:
                 clawServo1.setPosition(OPEN_CLAW);
+                clawServo2.setPosition(OPEN_CLAW);
                 if (closedButton) {
                     clawState = ClawState.CLOSED;
                 }
                 break;
             case CLOSED:
                 clawServo1.setPosition(CLOSED_CLAW);
+                clawServo2.setPosition(CLOSED_CLAW);
                 if (openButton) {
                     clawState = ClawState.OPEN;
                 }

@@ -34,13 +34,14 @@ public class VirtualFourBar {
                 if(closed) {
                     fourBarState = fourBarState.IN;
                 }
-
+                break;
             case OUT:
                 rollerServo1.setPosition(OUT_POSITION);
                 rollerServo2.setPosition(OUT_POSITION);
-                if(closed) {
+                if(open) {
                     fourBarState = fourBarState.IN;
                 }
+                break;
 
 
         }

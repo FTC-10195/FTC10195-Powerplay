@@ -10,7 +10,7 @@ public class Rock_Paper_Scissors_Game extends OpMode {
 
     long player2Score = 0;
 
-    boolean previousRightBumper = hardwareMap.;
+    boolean previousRightBumper = gamepad1.right_bumper;
 
 
 

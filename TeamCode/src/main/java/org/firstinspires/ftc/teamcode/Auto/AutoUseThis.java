@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -18,6 +19,7 @@ public class AutoUseThis extends LinearOpMode {
     DcMotor motorBackLeft;
     DcMotor motorFrontRight;
     DcMotor motorBackRight;
+    ColorSensor colorSensor;
     int br;
     int bl;
     int fr;
@@ -63,6 +65,7 @@ public class AutoUseThis extends LinearOpMode {
             bl = motorBackLeft.getCurrentPosition();
             fr = motorFrontRight.getCurrentPosition();
             fl = motorFrontLeft.getCurrentPosition();
+
             forward(1000);
             strafeRight(1000);
 

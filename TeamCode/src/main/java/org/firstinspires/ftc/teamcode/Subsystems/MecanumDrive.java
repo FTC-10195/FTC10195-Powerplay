@@ -128,9 +128,9 @@ public void drive(double upDown, double strafe, double turn) {
             // This ensures all the powers maintain the same ratio, but only when
             // at least one is out of the range [-1, 1]
             double denominator = Math.max(Math.abs(upDown) + Math.abs(strafe) + Math.abs(turn), 1);
-            double frontLeftPower = (upDown - strafe + turn) / denominator;
+            double frontLeftPower = (upDown + strafe + turn) / denominator;
             double backLeftPower = (upDown - strafe + turn) / denominator;
-            double frontRightPower = (upDown - strafe - turn) / denominator;
+            double frontRightPower = (upDown + strafe - turn) / denominator;
             double backRightPower = (upDown - strafe - turn) / denominator;
 
             motorFrontLeft.setPower(frontLeftPower);

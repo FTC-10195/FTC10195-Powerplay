@@ -92,7 +92,7 @@ public void drive(double upDown, double strafe, double turn) {
              turn =-turn;
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio, but only when
-   /* double botHeading = -imu.getAngularOrientation().firstAngle;
+   /* double b otHeading = -imu.getAngularOrientation().firstAngle;
     double rotX = strafe * Math.cos(botHeading) - upDown * Math.sin(botHeading);
     double rotY = strafe * Math.sin(botHeading) + upDown * Math.cos(botHeading);
 
@@ -131,7 +131,7 @@ public void drive(double upDown, double strafe, double turn) {
             double frontLeftPower = (upDown + strafe + turn) / denominator;
             double backLeftPower = (upDown - strafe + turn) / denominator;
             double frontRightPower = (upDown - strafe - turn) / denominator;
-            double backRightPower = (upDown + strafe - turn) / denominator;
+            double backRightPower = (upDown - strafe - turn) / denominator;
 
             motorFrontLeft.setPower(frontLeftPower);
             motorBackLeft.setPower(backLeftPower);

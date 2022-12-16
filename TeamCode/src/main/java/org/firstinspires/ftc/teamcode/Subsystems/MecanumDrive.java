@@ -130,8 +130,8 @@ public void drive(double upDown, double strafe, double turn) {
             double denominator = Math.max(Math.abs(upDown) + Math.abs(strafe) + Math.abs(turn), 1);
             double frontLeftPower = (upDown + strafe + turn) / denominator;
             double backLeftPower = (upDown - strafe + turn) / denominator;
-            double frontRightPower = (upDown + strafe - turn) / denominator;
-            double backRightPower = (upDown - strafe - turn) / denominator;
+            double frontRightPower = (upDown - strafe - turn) / denominator;
+            double backRightPower = (upDown + strafe - turn) / denominator;
 
             motorFrontLeft.setPower(frontLeftPower);
             motorBackLeft.setPower(backLeftPower);

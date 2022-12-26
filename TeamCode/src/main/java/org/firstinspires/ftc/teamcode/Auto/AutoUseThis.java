@@ -66,8 +66,8 @@ public class AutoUseThis extends LinearOpMode {
             fr = motorFrontRight.getCurrentPosition();
             fl = motorFrontLeft.getCurrentPosition();
 
-            forward(1000);
-            strafeRight(1000);
+            forward(1300);
+        //    strafeRight(1000);
 
 
         //   if(colorDetection.zone3) {

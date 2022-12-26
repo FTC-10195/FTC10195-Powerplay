@@ -20,10 +20,9 @@ public class LinearSlideTest extends LinearOpMode {
     public static int MEDIUM_POLE = -7397;
     public static int SHORT_POLE = -4634;
     public static int MAX_VALUE_V1 = -6510;
-    Claw claw = new Claw(hardwareMap);
     @Override
     public void runOpMode() throws InterruptedException {
-        linearSlide = hardwareMap.get(DcMotorEx.class, "linearSlide"); //Sets motor
+        linearSlide = hardwareMap.get(DcMotorEx.class, "ls"); //Sets motor
         linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

@@ -85,14 +85,33 @@ public class MecanumDrive  {
         telemetry = telemetry1;
     }
 
-
 public void drive(double upDown, double strafe, double turn) {
+
+    upDown = -upDown; // Remember, this is reversed!
+    strafe = strafe * 1.1; // Counteract imperfect strafing
+    turn =-turn;
+
+
+    double denominator = Math.max(Math.abs(upDown) + Math.abs(strafe) + Math.abs(turn), 1);
+            double frontLeftPower = (upDown + strafe + turn) / denominator;
+            double backLeftPower = (upDown - strafe + turn) / denominator;
+            double frontRightPower = (upDown - strafe - turn) / denominator;
+            double backRightPower = (upDown + strafe - turn) / denominator;
+
+            motorFrontLeft.setPower(frontLeftPower);
+            motorBackLeft.setPower(backLeftPower);
+            motorFrontRight.setPower(frontRightPower);
+            motorBackRight.setPower(backRightPower);
+
+
+}
+public void fieldDrive(double upDown, double strafe, double turn) {
              upDown = -upDown; // Remember, this is reversed!
-             strafe = -strafe * 1.1; // Counteract imperfect strafing
+             strafe = strafe * 1.1; // Counteract imperfect strafing
              turn =-turn;
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio, but only when
-   /* double b otHeading = -imu.getAngularOrientation().firstAngle;
+    double botHeading = -imu.getAngularOrientation().firstAngle;
     double rotX = strafe * Math.cos(botHeading) - upDown * Math.sin(botHeading);
     double rotY = strafe * Math.sin(botHeading) + upDown * Math.cos(botHeading);
 
@@ -117,7 +136,7 @@ public void drive(double upDown, double strafe, double turn) {
     telemetry.update();
 
 
-*/
+
 
 
     /*  double y = gamepad1.left_stick_y; // Remember, this is reversed!
@@ -127,17 +146,17 @@ public void drive(double upDown, double strafe, double turn) {
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio, but only when
             // at least one is out of the range [-1, 1]
-            double denominator = Math.max(Math.abs(upDown) + Math.abs(strafe) + Math.abs(turn), 1);
+      /*      double denominator = Math.max(Math.abs(upDown) + Math.abs(strafe) + Math.abs(turn), 1);
             double frontLeftPower = (upDown + strafe + turn) / denominator;
             double backLeftPower = (upDown - strafe + turn) / denominator;
             double frontRightPower = (upDown - strafe - turn) / denominator;
-            double backRightPower = (upDown - strafe - turn) / denominator;
+            double backRightPower = (upDown + strafe - turn) / denominator;
 
             motorFrontLeft.setPower(frontLeftPower);
             motorBackLeft.setPower(backLeftPower);
             motorFrontRight.setPower(frontRightPower);
             motorBackRight.setPower(backRightPower);
-
+*/
         }
 
     }

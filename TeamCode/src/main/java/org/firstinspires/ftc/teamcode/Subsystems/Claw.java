@@ -16,14 +16,13 @@ public class Claw {
 
 
     public Claw(HardwareMap hwmap) {
-
-        clawServo1 = hwmap.get(Servo.class, "clawOne");
-        clawServo2 = hwmap.get(Servo.class, "clawTwo");
+        clawServo1 = hwmap.servo.get("clawOne");
+        clawServo2 = hwmap.servo.get("clawTwo");
     }
 
     //TODO CHANGE THESE VALUES TO BE BETTER
     public final double OPEN_CLAW = 0;
-    public final double CLOSED_CLAW = .28;
+    public final double CLOSED_CLAW = .4;
 
     public enum ClawState {
         OPEN,

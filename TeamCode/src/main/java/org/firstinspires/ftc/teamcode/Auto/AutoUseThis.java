@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -34,7 +35,7 @@ public class AutoUseThis extends LinearOpMode {
         //   motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         //    motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
         //TODO THIS MOTOR NEEDS TO BE REVERSED ON THE MAIN ROBOT, UNCOMMENT LINE WHEN WORKING ON MAIN ROBOT//
-        motorBackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
         motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         DcMotor.ZeroPowerBehavior zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE;
@@ -52,6 +53,7 @@ public class AutoUseThis extends LinearOpMode {
         motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        ColorDetection colorDetection = new ColorDetection(hardwareMap);
 
         waitForStart();
 
@@ -63,9 +65,21 @@ public class AutoUseThis extends LinearOpMode {
             bl = motorBackLeft.getCurrentPosition();
             fr = motorFrontRight.getCurrentPosition();
             fl = motorFrontLeft.getCurrentPosition();
-            forward(1000);
-            strafeRight(1000);
 
+            forward(1300);
+        //    strafeRight(1000);
+
+
+        //   if(colorDetection.zone3) {
+          //      strafeRight(1000);
+
+         //  }
+        //   if(colorDetection.zone1){
+          //     strafeLeft(1000);
+
+         //  }
+         //  if(colorDetection.zone2) {
+        //   }
         }
 
 
@@ -93,7 +107,7 @@ public class AutoUseThis extends LinearOpMode {
             motorFrontRight.setPower(.1);
             motorFrontLeft.setPower(.1);
 
-            while(motorBackLeft.isBusy() && motorBackRight.isBusy() && motorFrontLeft.isBusy() && motorFrontRight.isBusy()){}
+            while(motorBackLeft.isBusy() || motorBackRight.isBusy() || motorFrontLeft.isBusy() || motorFrontRight.isBusy()){}
                 motorBackRight.setPower(0);
                 motorBackLeft.setPower(0);
                 motorFrontRight.setPower(0);
@@ -115,25 +129,58 @@ public class AutoUseThis extends LinearOpMode {
         motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            motorBackRight.setTargetPosition(distance);
-            motorBackLeft.setTargetPosition(-distance);
-            motorFrontRight.setTargetPosition(distance);
-            motorFrontLeft.setTargetPosition(-distance);
+            motorBackRight.setTargetPosition(-distance);
+            motorBackLeft.setTargetPosition(distance);
+            motorFrontRight.setTargetPosition(-distance);
+            motorFrontLeft.setTargetPosition(distance);
 
             motorBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            motorBackRight.setPower(1);
-            motorBackLeft.setPower(1);
-            motorFrontRight.setPower(1);
-            motorFrontLeft.setPower(1);
+            motorBackRight.setPower(.1);
+            motorBackLeft.setPower(.1);
+            motorFrontRight.setPower(.1);
+            motorFrontLeft.setPower(.1);
        while(motorBackLeft.isBusy() && motorBackRight.isBusy() && motorFrontLeft.isBusy() && motorFrontRight.isBusy()){}
         motorBackRight.setPower(0);
         motorBackLeft.setPower(0);
         motorFrontRight.setPower(0);
         motorFrontLeft.setPower(0);
+    }
+
+    public void strafeLeft(int distance) {
+        motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        motorBackRight.setTargetPosition(-distance);
+        motorBackLeft.setTargetPosition(distance);
+        motorFrontRight.setTargetPosition(-distance);
+        motorFrontLeft.setTargetPosition(distance);
+        motorBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        motorBackRight.setPower(1);
+        motorBackLeft.setPower(1);
+        motorFrontRight.setPower(1);
+        motorFrontLeft.setPower(1);
+
+        while(motorBackLeft.isBusy() && motorBackRight.isBusy() && motorFrontLeft.isBusy() && motorFrontRight.isBusy()){}
+        motorBackRight.setPower(0);
+        motorBackLeft.setPower(0);
+        motorFrontRight.setPower(0);
+        motorFrontLeft.setPower(0);
+
     }
 
 

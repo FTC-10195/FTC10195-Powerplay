@@ -14,8 +14,8 @@ public class OuttakeSlides {
     Claw claw;
     public final int MAX_VAL = 7000;
     public final int LOW = 400;
-    public final int MEDIUM = 700;
-    public final int HIGH = 1000;
+    public final int MEDIUM = 4000;
+    public final int HIGH = 6000;
     public final int ZERO = 0;
     public int currentPosition =0;
 

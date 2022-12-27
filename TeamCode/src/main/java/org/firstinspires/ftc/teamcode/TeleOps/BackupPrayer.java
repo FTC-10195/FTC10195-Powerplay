@@ -8,8 +8,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Subsystems.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Subsystems.VirtualFourBar;
 
-@TeleOp
-
+@TeleOp(group = "Match TeleOps")
 public class BackupPrayer extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {

@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import java.security.acl.Group;
 
+
+//program to test a two claw servo. Prints out to telemetry the current value of each claw servo, uses a falling edge detector for accuracy.
 @TeleOp(group = "Tests")
 public class clawServoTesterClassAyaam extends LinearOpMode {
 
@@ -14,6 +16,7 @@ public class clawServoTesterClassAyaam extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
+        //hardware map calls
         Servo clawServo1 = hardwareMap.servo.get("clawOne");
 
         Servo clawServo2 = hardwareMap.servo.get("clawTwo");
@@ -22,6 +25,7 @@ public class clawServoTesterClassAyaam extends LinearOpMode {
 
         double clawServo2Position = 0;
 
+        //falling edge detector
         boolean previousRightBumper = gamepad1.right_bumper;
 
         boolean previousLeftBumper = gamepad1.left_bumper;
@@ -62,6 +66,7 @@ public class clawServoTesterClassAyaam extends LinearOpMode {
 
             }
 
+            //falling edge detector, prevents the input from repeating during the loop
             previousRightBumper = gamepad1.right_bumper;
             previousLeftBumper = gamepad1.left_bumper;
 

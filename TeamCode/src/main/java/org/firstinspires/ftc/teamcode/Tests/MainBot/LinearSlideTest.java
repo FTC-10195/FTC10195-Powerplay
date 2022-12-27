@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.Claw;
 //TODO max position according to v1 scrim bot, any higher and the linear slide breaks- around negative 5760
 //TODO assign variables to positions once tuned
 
-@TeleOp
+@TeleOp(group = "Tests")
 public class LinearSlideTest extends LinearOpMode {
     public static DcMotorEx linearSlide; //defines motor
     int currentPosition;

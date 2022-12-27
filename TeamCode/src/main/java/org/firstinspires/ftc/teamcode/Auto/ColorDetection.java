@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
-@TeleOp
+@TeleOp(group = "Tests")
 public class ColorDetection extends LinearOpMode {
     RevColorSensorV3 colorSensorV3;
    public int red = 0;

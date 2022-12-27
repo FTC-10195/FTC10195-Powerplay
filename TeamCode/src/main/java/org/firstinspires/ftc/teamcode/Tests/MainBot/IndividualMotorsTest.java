@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.MecanumDrive;
 
 
 
-@TeleOp
+@TeleOp(group = "Tests")
 public class IndividualMotorsTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {

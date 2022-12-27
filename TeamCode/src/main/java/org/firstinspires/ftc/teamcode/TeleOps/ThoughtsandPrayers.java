@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Subsystems.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Subsystems.VirtualFourBar;
 
-@TeleOp
+@TeleOp(group = "Match TeleOps")
 
 public class ThoughtsandPrayers extends LinearOpMode {
     @Override

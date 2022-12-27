@@ -7,8 +7,13 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
+<<<<<<< Updated upstream
 //should be self explanatory
 @TeleOp(group = "Tests")
+=======
+//color sensing
+@TeleOp(group = "Auto")
+>>>>>>> Stashed changes
 public class ColorDetection extends LinearOpMode {
     RevColorSensorV3 colorSensorV3;
    public int red = 0;

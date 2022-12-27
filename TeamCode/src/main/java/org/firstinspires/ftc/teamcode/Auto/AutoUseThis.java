@@ -13,6 +13,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+
+//extremely ugly, encoder based auto
 @Autonomous
 public class AutoUseThis extends LinearOpMode {
     DcMotor motorFrontLeft;
@@ -28,13 +30,13 @@ public class AutoUseThis extends LinearOpMode {
     @SuppressLint("SuspiciousIndentation")
     @Override
     public void runOpMode() throws InterruptedException {
+      //all of the init stuff
         motorFrontLeft = hardwareMap.dcMotor.get("fl");
         motorBackLeft = hardwareMap.dcMotor.get("bl"); //reverse this
         motorFrontRight = hardwareMap.dcMotor.get("fr");
         motorBackRight = hardwareMap.dcMotor.get("br"); //reverse
         //   motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         //    motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        //TODO THIS MOTOR NEEDS TO BE REVERSED ON THE MAIN ROBOT, UNCOMMENT LINE WHEN WORKING ON MAIN ROBOT//
         motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
         motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -44,6 +46,7 @@ public class AutoUseThis extends LinearOpMode {
         motorFrontRight.setZeroPowerBehavior(zeroPowerBehavior);
         motorFrontLeft.setZeroPowerBehavior(zeroPowerBehavior);
 
+        //reset stuff
         motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -53,6 +56,8 @@ public class AutoUseThis extends LinearOpMode {
         motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        //call color detection through constructor
         ColorDetection colorDetection = new ColorDetection(hardwareMap);
 
         waitForStart();
@@ -65,6 +70,8 @@ public class AutoUseThis extends LinearOpMode {
             bl = motorBackLeft.getCurrentPosition();
             fr = motorFrontRight.getCurrentPosition();
             fl = motorFrontLeft.getCurrentPosition();
+
+            //go forward and depending on zone park there- HAS NOT BEEN TESTED IN A MATCH, THEORITICALLY SHOULD WORK
 
             forward(1300);
         //    strafeRight(1000);
@@ -86,7 +93,7 @@ public class AutoUseThis extends LinearOpMode {
 
     public void forward(int distance) {
 
-
+//reset encoder, go forward x amount of ticks at .1 speed
         motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -107,6 +114,7 @@ public class AutoUseThis extends LinearOpMode {
             motorFrontRight.setPower(.1);
             motorFrontLeft.setPower(.1);
 
+            //while loop exists so that the program does not stop the motors while the motors are still running, blocking code
             while(motorBackLeft.isBusy() || motorBackRight.isBusy() || motorFrontLeft.isBusy() || motorFrontRight.isBusy()){}
                 motorBackRight.setPower(0);
                 motorBackLeft.setPower(0);
@@ -117,6 +125,7 @@ public class AutoUseThis extends LinearOpMode {
     }
 
 
+    //literally same as before, just add some negatives bc of mecanum equations
     public void strafeRight(int distance) {
 
         motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

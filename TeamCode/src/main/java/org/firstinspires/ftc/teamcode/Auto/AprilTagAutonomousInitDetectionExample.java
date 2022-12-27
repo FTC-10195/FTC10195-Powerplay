@@ -33,7 +33,9 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 
 import java.util.ArrayList;
 
-@TeleOp
+
+//i dont understand this code atm
+@TeleOp(group = "copy pasted code")
 public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
 {
     OpenCvCamera camera;

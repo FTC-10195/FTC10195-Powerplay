@@ -48,6 +48,7 @@ public class Auto extends LinearOpMode {
             //TODO EITHER TUNE THIS FOR A PRELOAD DELIVERY OR PARK AND STOP OR IF COLOR SENSOR WORKS DO THAT
             int endForward;
 
+//this does not work, at all, idk why  not but it doesnt
             do {
                 endForward = forward(1000);
             } while (endForward != 1);

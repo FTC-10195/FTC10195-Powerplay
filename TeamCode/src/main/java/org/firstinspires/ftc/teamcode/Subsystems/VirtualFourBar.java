@@ -10,7 +10,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 public class VirtualFourBar {
-Claw claw = new Claw(hardwareMap);
+
+
+    Claw claw = new Claw(hardwareMap);
 
 
     public Servo rollerServo1;

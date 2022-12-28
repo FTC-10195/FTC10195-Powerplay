@@ -14,12 +14,12 @@ public class V4BTest extends LinearOpMode {
 
         waitForStart();
 
-        one.setPosition(.5);
-        two.setPosition(.5);
 
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
+            one.setPosition(.5);
+            two.setPosition(.5);
 
         }
     }

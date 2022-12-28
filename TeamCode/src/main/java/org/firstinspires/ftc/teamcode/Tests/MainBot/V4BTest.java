@@ -22,6 +22,8 @@ public class V4BTest extends LinearOpMode {
         Servo two = hardwareMap.servo.get("s2");
 
 
+        two.setDirection(Servo.Direction.REVERSE);
+
 
         waitForStart();
 
@@ -35,13 +37,13 @@ public class V4BTest extends LinearOpMode {
 
         if (gamepad1.right_bumper && !previousRightBumper) {
             clawServo1Position += .05;
-            clawServo2Position -= .05;
+            clawServo2Position += .05;
 
         }
 
         if (gamepad1.left_bumper && !previousLeftBumper) {
             clawServo1Position -= .05;
-            clawServo2Position += .05;
+            clawServo2Position -= .05;
         }
 
 

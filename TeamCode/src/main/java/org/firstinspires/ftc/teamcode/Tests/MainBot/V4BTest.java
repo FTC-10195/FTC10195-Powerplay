@@ -9,9 +9,10 @@ public class V4BTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        double clawServo1Position = 0;
 
-    double clawServo2Position = 0;
+        double servoOne = 0;
+
+    double servoTwo = 0;
 
     //falling edge detector
     boolean previousRightBumper = gamepad1.right_bumper;
@@ -29,19 +30,19 @@ public class V4BTest extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-        one.setPosition(clawServo1Position);
+        one.setPosition(servoOne);
 
-        two.setPosition(clawServo2Position);
+        two.setPosition(servoTwo);
 
         if (gamepad1.right_bumper && !previousRightBumper) {
-            clawServo1Position += .05;
-            clawServo2Position += .05;
+            servoOne += .05;
+            servoTwo += .05;
 
         }
 
         if (gamepad1.left_bumper && !previousLeftBumper) {
-            clawServo1Position -= .05;
-            clawServo2Position -= .05;
+            servoOne -= .05;
+            servoTwo -= .05;
         }
 
 
@@ -49,8 +50,8 @@ public class V4BTest extends LinearOpMode {
         previousRightBumper = gamepad1.right_bumper;
         previousLeftBumper = gamepad1.left_bumper;
 
-        telemetry.addData("Servo One Position", clawServo1Position);
-        telemetry.addData("Servo Two Position", clawServo2Position);
+        telemetry.addData("Servo One Position", servoOne);
+        telemetry.addData("Servo Two Position", servoTwo);
         telemetry.update();
     }
 }

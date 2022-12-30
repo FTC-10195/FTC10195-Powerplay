@@ -9,9 +9,9 @@ public class V4BTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        double clawServo1Position = 0;
+        double clawServo1Position = 0.5;
 
-    double clawServo2Position = 0;
+    double clawServo2Position = 0.5;
 
     //falling edge detector
     boolean previousRightBumper = gamepad1.right_bumper;

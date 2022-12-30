@@ -22,8 +22,11 @@ public class ClawBar {
     public ClawBar(HardwareMap hwmap) {
         clawServo1 = hwmap.servo.get("clawOne");
         clawServo2 = hwmap.servo.get("clawTwo");
-        rollerServo1 = hwmap.servo.get("rollerServo1");
-        rollerServo2 = hwmap.servo.get("rollerServo2");
+        rollerServo1 = hwmap.servo.get("s1");
+        rollerServo2 = hwmap.servo.get("s2");
+        rollerServo1.setDirection(Servo.Direction.REVERSE);
+        rollerServo2.setDirection(Servo.Direction.REVERSE);
+
         timer = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
     }
 

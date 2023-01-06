@@ -24,7 +24,6 @@ public class ClawBar {
         clawServo2 = hwmap.servo.get("clawTwo");
         rollerServo1 = hwmap.servo.get("s1");
         rollerServo2 = hwmap.servo.get("s2");
-
         rollerServo1.setDirection(Servo.Direction.REVERSE);
         rollerServo2.setDirection(Servo.Direction.REVERSE);
 

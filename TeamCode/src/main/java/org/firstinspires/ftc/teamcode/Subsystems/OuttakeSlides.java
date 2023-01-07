@@ -92,15 +92,27 @@ public class OuttakeSlides {
         }
 
     private void position(int pole) {
+
         slide.setTargetPosition(pole);
         slide1.setTargetPosition(pole);
+
+
         slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slide1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        slide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slide1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         slide.setPower(1);
         slide1.setPower(1);
+
+
         slide.setTargetPositionTolerance(25);
         slide1.setTargetPositionTolerance(25);
+
         currentPosition = slide.getCurrentPosition();
+        int currentPosition2 = slide1.getCurrentPosition();
+
         if (currentPosition <= pole) {
          //   resetSlides();
             slide.setPower(0);

@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class VirtualFourBar {
 
 
-    Claw claw = new Claw(hardwareMap);
+  //  Claw claw = new Claw(hardwareMap);
 
 
     public Servo rollerServo1;
@@ -26,8 +26,8 @@ public class VirtualFourBar {
     }
 
     public VirtualFourBar(HardwareMap hwmap) {
-        rollerServo1 = hwmap.get(Servo.class, "rollerServo1");
-        rollerServo2 = hwmap.get(Servo.class, "rollerServo1");
+        rollerServo1 = hwmap.get(Servo.class, "s1");
+        rollerServo2 = hwmap.get(Servo.class, "s2");
     }
 
     FourBar fourBarState = FourBar.OUT;
@@ -38,10 +38,10 @@ public class VirtualFourBar {
             case IN:
                rollerServo1.setPosition(IN_POISTION);
                rollerServo2.setPosition(IN_POISTION);
-                claw.clawState = Claw.ClawState.OPEN;
+             //   claw.clawState = Claw.ClawState.OPEN;
                 if(closed) {
-                    fourBarState = fourBarState.IN;
-                    claw.clawState = Claw.ClawState.CLOSED;
+                    fourBarState = fourBarState.OUT;
+                 //   claw.clawState = Claw.ClawState.CLOSED;
                 }
                 break;
             case OUT:
@@ -49,7 +49,7 @@ public class VirtualFourBar {
                 rollerServo2.setPosition(OUT_POSITION);
                 if(open) {
                     fourBarState = fourBarState.IN;
-                    claw.clawState = Claw.ClawState.OPEN;
+              //      claw.clawState = Claw.ClawState.OPEN;
                 }
                 break;
         }

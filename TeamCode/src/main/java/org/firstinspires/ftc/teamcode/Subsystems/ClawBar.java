@@ -1,12 +1,8 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 public class ClawBar {
@@ -19,17 +15,19 @@ public class ClawBar {
     public final double IN_POSITION = .6;
     public final double OPEN_CLAW = 0;
     public final double CLOSED_CLAW = .4;
-
+    ElapsedTime timer;
 
 
 
     public ClawBar(HardwareMap hwmap) {
         clawServo1 = hwmap.servo.get("clawOne");
         clawServo2 = hwmap.servo.get("clawTwo");
-        rollerServo1 = hwmap.servo.get("rollerServo1");
-        rollerServo2 = hwmap.servo.get("rollerServo2");
+        rollerServo1 = hwmap.servo.get("s1");
+        rollerServo2 = hwmap.servo.get("s2");
+        rollerServo1.setDirection(Servo.Direction.REVERSE);
+        rollerServo2.setDirection(Servo.Direction.REVERSE);
 
-
+        timer = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
     }
 
     //TODO CHANGE THESE VALUES TO BE BETTER
@@ -41,22 +39,30 @@ public class ClawBar {
 
     public ClawState clawState = ClawState.OPEN;
 
-    public void intake(boolean openButton, boolean closedButton) throws InterruptedException {
+    public void intake(boolean openButton, boolean closedButton)  {
         switch (clawState) {
             case OPEN:
+                timer.startTime();
                 clawServo1.setPosition(OPEN_CLAW);
                 clawServo2.setPosition(OPEN_CLAW);
-                rollerServo1.setPosition(OUT_POSITION);
-                rollerServo2.setPosition(OUT_POSITION);
+                if(timer.time() > 100) {
+                    rollerServo1.setPosition(IN_POSITION);
+                    rollerServo2.setPosition(IN_POSITION);
+                    timer.reset();
+                }
                 if (closedButton) {
                     clawState = ClawState.CLOSED;
                 }
                 break;
             case CLOSED:
+                timer.startTime();
                 clawServo1.setPosition(CLOSED_CLAW);
                 clawServo2.setPosition(CLOSED_CLAW);
-                rollerServo1.setPosition(OUT_POSITION);
-                rollerServo2.setPosition(OUT_POSITION);
+                if(timer.time() > 100) {
+                    rollerServo1.setPosition(OUT_POSITION);
+                    rollerServo2.setPosition(OUT_POSITION);
+                    timer.reset();
+                }
                 if (openButton) {
                     clawState = ClawState.OPEN;
                 }

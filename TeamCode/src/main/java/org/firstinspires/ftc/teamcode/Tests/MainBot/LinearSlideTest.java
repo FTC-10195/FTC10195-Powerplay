@@ -29,23 +29,32 @@ public class LinearSlideTest extends LinearOpMode {
         linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        boolean previousXButton = gamepad1.x;
+
+        boolean previousBButton = gamepad1.b;
 
         waitForStart();
         while (opModeIsActive()) {
 
             //Controls movement
             currentPosition = linearSlide.getCurrentPosition();
-            if (gamepad1.y) {
+            if (gamepad1.x && !previousXButton) {
                 linearSlide.setPower(1);
                 linearSlide2.setPower(1);
             }
-            else if (gamepad1.b) {
+            else if (gamepad1.b && !previousBButton) {
                 linearSlide.setPower(-1);
                 linearSlide2.setPower(-1);
 
             }
+             previousXButton = gamepad1.x;
+
+             previousBButton = gamepad1.b;
+
+
             telemetry.addData("Encoder Value", currentPosition);
             telemetry.update();
+
 
         }
     }

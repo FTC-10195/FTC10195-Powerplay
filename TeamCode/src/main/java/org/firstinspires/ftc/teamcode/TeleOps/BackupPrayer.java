@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.TeleOps;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import Claw;
 
 import org.firstinspires.ftc.teamcode.Subsystems.MecanumDrive;
 

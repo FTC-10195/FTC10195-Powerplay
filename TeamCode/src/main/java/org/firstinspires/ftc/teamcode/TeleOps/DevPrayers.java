@@ -2,12 +2,9 @@ package org.firstinspires.ftc.teamcode.TeleOps;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Subsystems.Claw;
-import org.firstinspires.ftc.teamcode.Subsystems.ClawBar;
-import org.firstinspires.ftc.teamcode.Subsystems.LinearSlide;
-import org.firstinspires.ftc.teamcode.Subsystems.MecanumDrive;
-import org.firstinspires.ftc.teamcode.Subsystems.OuttakeSlides;
-import org.firstinspires.ftc.teamcode.Subsystems.VirtualFourBar;
+import Claw;
+
+import org.firstinspires.ftc.teamcode.Subsystems.Intake.VirtualFourBar;
 
 @TeleOp(group = "Tests")
 public class DevPrayers extends LinearOpMode {
@@ -23,7 +20,6 @@ public class DevPrayers extends LinearOpMode {
         while (opModeIsActive()) {
         //    mecanumDrive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
          //   intake.intake(gamepad1.a, gamepad1.x);
-           bar.rollerRotate(gamepad1.a, gamepad1.b);
         //    intake.intake(gamepad1.x, gamepad1.y);
         }
 

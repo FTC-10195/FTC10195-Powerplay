@@ -21,7 +21,7 @@ public class V4BTest extends LinearOpMode {
 
     Servo one = hardwareMap.servo.get("s1");
         Servo two = hardwareMap.servo.get("s2");
-//one.setDirection(Servo.Direction.REVERSE);
+one.setDirection(Servo.Direction.REVERSE);
 //two.setDirection(Servo.Direction.REVERSE);
 
         waitForStart();

@@ -4,16 +4,16 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.teamcode.Subsystems.Claw;
 
 //TODO max position according to v1 scrim bot, any higher and the linear slide breaks- around negative 5760
 //TODO assign variables to positions once tuned
 
 @TeleOp(group = "Tests")
 public class LinearSlideTest extends LinearOpMode {
-    public static DcMotorEx linearSlide; //defines motor
+     DcMotorEx linearSlide;
+    DcMotorEx linearSlide2;
+    //defines motor
     int currentPosition;
     //TODO TUNE THESE VALUES
     public static int TALL_POLE = 0;
@@ -22,42 +22,28 @@ public class LinearSlideTest extends LinearOpMode {
     public static int MAX_VALUE_V1 = -6510;
     @Override
     public void runOpMode() throws InterruptedException {
-        linearSlide = hardwareMap.get(DcMotorEx.class, "ls"); //Sets motor
-        linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        linearSlide = hardwareMap.get(DcMotorEx.class, "ls");
+        linearSlide2 = hardwareMap.get(DcMotorEx.class, "ls2");
 
+        //Sets motor
+        linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
-
         while (opModeIsActive()) {
 
-            if (gamepad1.dpad_up) {
-                position(TALL_POLE);
-            }
-            if (gamepad1.dpad_right) {
-                position(MEDIUM_POLE);
-            }
-            if (gamepad1.dpad_left) {
-                position(SHORT_POLE);
-            }
-            //to test function only
-            if (gamepad1.dpad_down) {
-                position(MAX_VALUE_V1);
-            }
             //Controls movement
             currentPosition = linearSlide.getCurrentPosition();
-            if (gamepad1.left_bumper) {
+            if (gamepad1.y) {
                 linearSlide.setPower(1);
+                linearSlide2.setPower(1);
             }
-            if (gamepad1.right_bumper) {
+            else if (gamepad1.b) {
                 linearSlide.setPower(-1);
-            }
+                linearSlide2.setPower(-1);
 
-            if (gamepad1.b) {
-                linearSlide.setMotorDisable();
             }
-
             telemetry.addData("Encoder Value", currentPosition);
             telemetry.update();
 

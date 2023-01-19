@@ -1,7 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystems;
-
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+package org.firstinspires.ftc.teamcode.Subsystems.Outtake;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -11,7 +8,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class OuttakeSlides {
     DcMotorEx slide;
     DcMotorEx slide1;
-    Claw claw;
     public final int MAX_VAL = 7000;
     public final int LOW = 400;
     public final int MEDIUM = 4000;
@@ -21,7 +17,6 @@ public class OuttakeSlides {
 
 
     public OuttakeSlides(HardwareMap map) {
-        claw = new Claw(map);
         slide = map.get(DcMotorEx.class, "ls");
         slide1 = map.get(DcMotorEx.class, "ls1");
         slide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -84,7 +79,6 @@ public class OuttakeSlides {
             //to test function only
             if (down) {
                 position(ZERO);
-                claw.clawState = Claw.ClawState.OPEN;
             }
 
 

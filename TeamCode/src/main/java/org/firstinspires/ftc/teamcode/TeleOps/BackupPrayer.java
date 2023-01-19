@@ -2,11 +2,9 @@ package org.firstinspires.ftc.teamcode.TeleOps;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Subsystems.Claw;
-import org.firstinspires.ftc.teamcode.Subsystems.LinearSlide;
+import Claw;
+
 import org.firstinspires.ftc.teamcode.Subsystems.MecanumDrive;
-import org.firstinspires.ftc.teamcode.Subsystems.OuttakeSlides;
-import org.firstinspires.ftc.teamcode.Subsystems.VirtualFourBar;
 
 @TeleOp(group = "Match TeleOps")
 public class BackupPrayer extends LinearOpMode {

@@ -55,6 +55,7 @@ public class LinearSlideTest extends LinearOpMode {
                 linearSlide.setPower(0);
                 linearSlide2.setPower(0);
             }
+
              previousXButton = gamepad1.x;
 
              previousBButton = gamepad1.b;

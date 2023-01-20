@@ -9,10 +9,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.Intake.VirtualFourBar;
 public class DevPrayers extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-      //  MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, telemetry);
-        //VirtualFourBar bar = new VirtualFourBar(hardwareMap);
-       // ClawBar intake = new ClawBar(hardwareMap);
-        VirtualFourBar bar = new VirtualFourBar(hardwareMap);
+
         waitForStart();
 
         if (isStopRequested()) return;

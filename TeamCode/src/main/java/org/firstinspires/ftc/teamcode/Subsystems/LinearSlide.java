@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class LinearSlide {
     public static DcMotorEx linearSlide; //defines motor
     int currentPosition;
+    DcMotorEx linearSlide2;
     //TODO TUNE THESE VALUES
     public static int TALL_POLE = -6510;
     public static int MEDIUM_POLE = 0;
@@ -23,11 +24,20 @@ public class LinearSlide {
     public static int GROUND = 0;
 
     public LinearSlide(HardwareMap hwmp) {
-    linearSlide = hwmp.get(DcMotorEx.class, "linearSlide");
-    linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-    linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-    linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-}
+        linearSlide = hwmp.get(DcMotorEx.class, "ls");
+        linearSlide2 = hwmp.get(DcMotorEx.class, "ls2");
+
+        //Sets motor
+        linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        linearSlide2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        linearSlide2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlide2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+    }
 
 public void slideMovement(boolean up, boolean down, boolean left, boolean right) {
             if (up) {
@@ -46,21 +56,27 @@ public void slideMovement(boolean up, boolean down, boolean left, boolean right)
             }
         }
 
-        public void manualMove(double leftTrigger, double rightTrigger, boolean stop) {
+        public void manualMove(boolean up, boolean down) {
 
-        if(leftTrigger > 0.1) {
-            linearSlide.setPower(leftTrigger);
-        }
-          else if(rightTrigger > 0.1) {
-            linearSlide.setPower(-rightTrigger);
-        }
-          else {
-              linearSlide.setMotorDisable();
-        }
-
-            if(stop) {
-                linearSlide.setMotorDisable();
+            currentPosition = linearSlide.getCurrentPosition();
+            if (up) {
+                linearSlide.setPower(1);
+                linearSlide2.setPower(1);
             }
+            else if (down) {
+                linearSlide.setPower(-1);
+                linearSlide2.setPower(-1);
+            }
+            else {
+
+                linearSlide.setPower(.05);
+                linearSlide2.setPower(.05);
+            }
+
+            telemetry.addData("Encoder Value", currentPosition);
+            telemetry.update();
+
+
 
         }
 

@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
 //TODO max position according to v1 scrim bot, any higher and the linear slide breaks- around negative 5760
@@ -29,6 +30,10 @@ public class LinearSlideTest extends LinearOpMode {
         linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        linearSlide2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        linearSlide2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlide2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        linearSlide.setDirection(DcMotorSimple.Direction.REVERSE);
         boolean previousXButton = gamepad1.x;
 
         boolean previousBButton = gamepad1.b;
@@ -38,14 +43,17 @@ public class LinearSlideTest extends LinearOpMode {
 
             //Controls movement
             currentPosition = linearSlide.getCurrentPosition();
-            if (gamepad1.x && !previousXButton) {
+            if (gamepad1.x) {
                 linearSlide.setPower(1);
                 linearSlide2.setPower(1);
             }
-            else if (gamepad1.b && !previousBButton) {
+            else if (gamepad1.b) {
                 linearSlide.setPower(-1);
                 linearSlide2.setPower(-1);
 
+            } else {
+                linearSlide.setPower(0);
+                linearSlide2.setPower(0);
             }
              previousXButton = gamepad1.x;
 

@@ -54,7 +54,7 @@ public class AutoBackup extends LinearOpMode {
         motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //call color detection through constructor
-        ColorDetection colorDetection = new ColorDetection(hardwareMap);
+      //  ColorDetection colorDetection = new ColorDetection(hardwareMap);
 
         waitForStart();
 

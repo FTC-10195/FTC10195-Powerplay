@@ -21,9 +21,10 @@ public class BackupPrayer extends LinearOpMode {
 
         while (opModeIsActive()) {
             mecanumDrive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
-            slide.slideStates(gamepad1.dpad_up, gamepad1.dpad_down, gamepad1.dpad_left, gamepad1.dpad_right, gamepad1.y, gamepad1.b);
-            link.switchStates(gamepad1.a, gamepad1.x);
-            roll.switchStates(gamepad1.left_bumper, gamepad1.right_bumper);
+            slide.manualMove(gamepad1.y, gamepad1.b);
+            link.manualMovement(gamepad1.a, gamepad1.x);
+            roll.movement(gamepad1.left_bumper, gamepad1.right_bumper);
+
             if (gamepad1.dpad_right) {
                 slide.slideStates(true, false, false, false, false, false);
                 if (slide.currentPosition > 3000) {

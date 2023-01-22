@@ -47,10 +47,12 @@ public class LinearSlide {
 public enum slideStates {
         MANUAL,
         AUTO,
+    STOPPED
 }
 slideStates sStates = slideStates.MANUAL;
 
 public void slideStates(boolean up, boolean down, boolean left, boolean right, boolean manUp, boolean manDown) {
+
         switch(sStates){
             case AUTO:
                 slideMovement(up, down, left, right);
@@ -63,11 +65,14 @@ public void slideStates(boolean up, boolean down, boolean left, boolean right, b
                 if(up || down || left || right) {
                     sStates = sStates.AUTO;
                 }
+
+            default:
+                slideMovement(false, false, false, false);
     }
 }
 
 
-private void slideMovement(boolean up, boolean down, boolean left, boolean right) {
+public void slideMovement(boolean up, boolean down, boolean left, boolean right) {
             if (up) {
                 position(TALL_POLE);
             }
@@ -84,7 +89,7 @@ private void slideMovement(boolean up, boolean down, boolean left, boolean right
             }
         }
 
-        private void manualMove(boolean up, boolean down) {
+        public void manualMove(boolean up, boolean down) {
 
             currentPosition = linearSlide.getCurrentPosition();
 

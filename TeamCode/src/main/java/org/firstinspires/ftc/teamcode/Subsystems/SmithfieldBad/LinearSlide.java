@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 //TODO max position according to v1 scrim bot, any higher and the linear slide breaks- around negative 5760
-
+//brrat
 
 public class LinearSlide {
     public static DcMotorEx linearSlide; //defines motor

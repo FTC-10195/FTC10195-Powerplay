@@ -175,23 +175,31 @@ public class PrayersAuto extends LinearOpMode {
             bl =motorBackLeft.getCurrentPosition();
             fr =motorFrontRight.getCurrentPosition();
             fl =motorFrontLeft.getCurrentPosition();
-           forward(1300);
-            strafeLeft(1300);
+            telemetry.addData("Zone Left- One", 1);
+            telemetry.update();
+         //  forward(1300);
+          //  strafeLeft(1300);
         }
         else if(tagOfInterest.id == MIDDLE) {
             br =motorBackRight.getCurrentPosition();
             bl =motorBackLeft.getCurrentPosition();
             fr =motorFrontRight.getCurrentPosition();
             fl =motorFrontLeft.getCurrentPosition();
-            forward(1300);
+          //  forward(1300);
+            telemetry.addData("Zone Middle- Two", 2);
+            telemetry.update();
+
         }
         else {
             br =motorBackRight.getCurrentPosition();
             bl =motorBackLeft.getCurrentPosition();
             fr =motorFrontRight.getCurrentPosition();
             fl =motorFrontLeft.getCurrentPosition();
-            forward(1300);
-            strafeRight(1300);
+           // forward(1300);
+          //  strafeRight(1300);
+            telemetry.addData("Zone Right- Three", 3);
+            telemetry.update();
+
 
         }
 

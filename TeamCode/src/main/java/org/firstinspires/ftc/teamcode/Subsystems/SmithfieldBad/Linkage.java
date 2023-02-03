@@ -28,12 +28,12 @@ public class Linkage {
             case IN:
                 movement(true, false);
                 if(rrb) {
-                    linkageStates = linkageStates.OUT;
+                    linkageStates = STATES.OUT;
                 }
             case OUT:
                 movement(false, true);
                 if(brr) {
-                    linkageStates = linkageStates.IN;
+                    linkageStates = STATES.IN;
                 }
             case MANUAL:
                 manualMovement(brr, rrb);

@@ -1,0 +1,48 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+public class PIDControls {
+
+    double Kp;
+    double Ki;
+    double Kd;
+    int target = 0;
+    int currentPosition = 0;
+
+    double derivative = 0;
+
+
+    double integralSum = 0;
+
+   double lastError = 0;
+
+   double error = 0;
+
+   // Elapsed timer class from SDK, please use it, it's epic
+    ElapsedTime timer = new ElapsedTime();
+
+currentPosition = 0;
+
+    // obtain the encoder position
+        currentPosition = armMotor.getPosition();
+
+        // calculate the error
+        error = reference - encoderPosition;
+
+        // rate of change of the error
+        derivative = (error - lastError) / timer.seconds();
+
+        // sum of all error over time
+        integralSum = integralSum + (error * timer.seconds());
+
+        out = (Kp * error) + (Ki * integralSum) + (Kd * derivative);
+
+        armMotor.setPower(out);
+
+        lastError = error;
+
+        // reset the timer for next time
+        timer.reset();
+
+}

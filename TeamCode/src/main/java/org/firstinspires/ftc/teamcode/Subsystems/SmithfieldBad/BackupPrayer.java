@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
 import org.firstinspires.ftc.teamcode.Subsystems.MecanumDrive;
+import org.firstinspires.ftc.teamcode.archive.RollerCarriage;
 
 @TeleOp(group = "Match TeleOps")
 public class BackupPrayer extends LinearOpMode {
@@ -12,8 +13,9 @@ public class BackupPrayer extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, telemetry);
         LinearSlide slide = new LinearSlide(hardwareMap, telemetry);
-        RollerCarriage roll = new RollerCarriage(hardwareMap);
+      //  RollerCarriage roll = new RollerCarriage(hardwareMap);
         Linkage link = new Linkage(hardwareMap);
+        Claw claw = new Claw(hardwareMap);
         waitForStart();
 
         if (isStopRequested()) return;
@@ -21,10 +23,15 @@ public class BackupPrayer extends LinearOpMode {
 
         while (opModeIsActive()) {
             mecanumDrive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
-            slide.slideStates(gamepad1.dpad_up, gamepad1.dpad_down, gamepad1.dpad_left, gamepad1.dpad_right, gamepad1.y, gamepad1.b);
-            link.switchStates(gamepad1.a, gamepad1.x);
-            roll.switchStates(gamepad1.left_bumper, gamepad1.right_bumper);
-            if (gamepad1.dpad_right) {
+           // slide.slideStates(gamepad1.dpad_up, gamepad1.dpad_down, gamepad1.dpad_left, gamepad1.dpad_right, gamepad1.y, gamepad1.b);
+           slide.manualMove(gamepad1.a, gamepad1.b);
+           // slide.slideMovement(gamepad1.dpad_up, gamepad1.dpad_down, gamepad1.dpad_left, gamepad1.dpad_right);
+           // link.switchStates(gamepad1.a, gamepad1.x);
+            link.movement(gamepad1.a, gamepad1.x);
+            claw.clawMove(gamepad1.left_bumper, gamepad1.right_bumper);
+           // link.switchStates(gamepad1.a, gamepad1.x);
+            //roll.switchStates(gamepad1.left_bumper, gamepad1.right_bumper);
+          /*  if (gamepad1.dpad_right) {
                 slide.slideStates(true, false, false, false, false, false);
                 if (slide.currentPosition > 3000) {
                     link.switchStates(true, false);
@@ -44,14 +51,10 @@ public class BackupPrayer extends LinearOpMode {
                             if (slide.currentPosition > 3000) {
                                 link.switchStates(true, false);
                             }
-
+*/
 
                         }
                     }
 
                 }
-            }
-        }
-    }
-}
 

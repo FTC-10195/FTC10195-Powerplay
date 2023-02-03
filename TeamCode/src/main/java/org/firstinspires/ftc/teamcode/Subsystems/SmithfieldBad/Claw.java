@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystems.Intake;
+package org.firstinspires.ftc.teamcode.Subsystems.SmithfieldBad;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
@@ -11,30 +11,43 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Claw {
 
-    public Servo clawServo1;
-    public Servo clawServo2;
+    public Servo clawServo;
 
 
     public Claw(HardwareMap hwmap) {
-        clawServo1 = hwmap.servo.get("clawOne");
-        clawServo2 = hwmap.servo.get("clawTwo");
+        clawServo = hwmap.servo.get("clawOne");
     }
 
     //TODO CHANGE THESE VALUES TO BE BETTER
     public final double OPEN_CLAW = 0;
-    public final double CLOSED_CLAW = .4;
+    public final double CLOSED_CLAW = .55;
 
-
+public enum claw {
+    OPEN,
+    CLOSED
+}
+claw ClawState = claw.CLOSED;
     public void clawMove(boolean openButton, boolean closedButton) {
 
-        if(openButton) {move(OPEN_CLAW);}
-        if(closedButton) {move(CLOSED_CLAW);}
+        switch(ClawState) {
+            case OPEN:
+               move(OPEN_CLAW);
+               if(closedButton) {
+                   ClawState = claw.CLOSED;
+               }
+
+            case CLOSED:
+                move(CLOSED_CLAW);
+                if(openButton) {
+                    ClawState = claw.OPEN;
+                }
+        }
+
         }
 
 
         private void move(double position) {
-        clawServo1.setPosition(position);
-        clawServo2.setPosition(position);
+        clawServo.setPosition(position);
 
     }
 }

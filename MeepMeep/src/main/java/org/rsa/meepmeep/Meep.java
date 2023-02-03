@@ -18,12 +18,12 @@ public class Meep {
             }
         };
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
-                 .setConstraints(65, 60, Math.toRadians(85), Math.toRadians(80), 15)
+                 .setConstraints(200, 200, Math.toRadians(360), Math.toRadians(360), 15)
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(38, -52, 90))
                                 .splineTo(new Vector2d(0,0), 90)
                                 .addSpatialMarker(new Vector2d(0,0), call)
-                                .waitSeconds(4)
+                               // .waitSeconds(4)
                                 .splineTo(new Vector2d(20, 30), 10)
                                 .splineTo(new Vector2d(20, -52), -52)
                                     .build()

@@ -18,10 +18,11 @@ public class LinkageTest extends LinearOpMode {
 
         //hardware map calls
         Servo clawServo1 = hardwareMap.servo.get("linkageS");
+        Servo clawServo2 = hardwareMap.servo.get("linkageS1");
 
 
         double clawServo1Position = 0;
-
+        double clawServo2Position = 0;
 
         //falling edge detector
         boolean previousRightBumper = gamepad1.right_bumper;
@@ -39,15 +40,17 @@ public class LinkageTest extends LinearOpMode {
         while (opModeIsActive()) {
 
             clawServo1.setPosition(clawServo1Position);
-
+            clawServo2.setPosition(clawServo2Position);
 
             if (gamepad1.right_bumper && !previousRightBumper) {
                 clawServo1Position += .05;
+                clawServo2Position += .05;
 
             }
 
             if (gamepad1.left_bumper && !previousLeftBumper) {
                 clawServo1Position -= .05;
+                clawServo2Position -= .05;
             }
 
 

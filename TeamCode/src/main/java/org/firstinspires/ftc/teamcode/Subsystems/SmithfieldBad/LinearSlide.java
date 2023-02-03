@@ -2,12 +2,16 @@ package org.firstinspires.ftc.teamcode.Subsystems.SmithfieldBad;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
+import com.acmerobotics.roadrunner.control.PIDFController;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.PIDCoefficients;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -19,7 +23,7 @@ public class LinearSlide {
     int currentPosition;
     DcMotorEx linearSlide2;
     //TODO TUNE THESE VALUES
-    public static int TALL_POLE;
+    public static int TALL_POLE = 6000;
     public static int MEDIUM_POLE = 0;
     public static int SHORT_POLE = 0;
     public static int MAX_VALUE_V1;
@@ -54,19 +58,19 @@ public void slideStates(boolean up, boolean down, boolean left, boolean right, b
             case AUTO:
                 slideMovement(up, down, left, right);
                 if(manDown || manUp) {
-                    sStates = sStates.MANUAL;
+                    sStates = slideStates.MANUAL;
                 }
 
             case MANUAL:
                 manualMove(manUp, manUp);
                 if(up || down || left || right) {
-                    sStates = sStates.AUTO;
+                    sStates = slideStates.AUTO;
                 }
     }
 }
 
 
-private void slideMovement(boolean up, boolean down, boolean left, boolean right) {
+public void slideMovement(boolean up, boolean down, boolean left, boolean right) {
             if (up) {
                 position(TALL_POLE);
             }
@@ -83,11 +87,11 @@ private void slideMovement(boolean up, boolean down, boolean left, boolean right
             }
         }
 
-        private void manualMove(boolean up, boolean down) {
+        public void manualMove(boolean up, boolean down) {
 
             currentPosition = linearSlide.getCurrentPosition();
 
-          if(currentPosition < MAX_VALUE_V1) {
+
             if (up) {
                 linearSlide.setPower(1);
                 linearSlide2.setPower(1);
@@ -98,20 +102,19 @@ private void slideMovement(boolean up, boolean down, boolean left, boolean right
             }
             else {
 
-                linearSlide.setPower(.05);
-                linearSlide2.setPower(.05);
+                linearSlide.setPower(0);
+                linearSlide2.setPower(0);
             }
 
             telemetry.addData("Encoder Value", currentPosition);
             telemetry.update();
 
-}
-    else {
-        linearSlide.setPower(-.05);
-        linearSlide2.setPower(-.05);
-        }
+
 }
     private void position(int pole) {
+
+
+
         linearSlide.setTargetPosition(pole);
         linearSlide.setTargetPositionTolerance(50);
         linearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -130,6 +133,39 @@ private void slideMovement(boolean up, boolean down, boolean left, boolean right
         linearSlide.setTargetPosition(0);
         linearSlide.setPower(1);
     }
+       /* public double output(int pole) {
+        double Kp  = 0;
+        double Ki = 0;
+        double Kd = 0;
+
+        double integralSum = 0;
+
+        double lastError = 0;
+
+        double error = 0;
+
+        double derivative = 0;
+        double currentPos = linearSlide.getCurrentPosition();
+
+        ElapsedTime timer=  new ElapsedTime();
+
+
+        currentPos = linearSlide.getCurrentPosition();
+
+        error = pole - currentPos;
+
+        derivative = (error - lastError)/timer.seconds();
+
+        integralSum = integralSum + error * timer.seconds();
+
+        return  (Kp * error + (Ki * integralSum) + (Kd * derivative));
+d
+
+    }
+
+}
+    */
+
 }
 
 

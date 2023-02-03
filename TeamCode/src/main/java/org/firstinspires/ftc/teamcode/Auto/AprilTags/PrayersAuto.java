@@ -30,7 +30,7 @@ public class PrayersAuto extends LinearOpMode {
     int fl;
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
-
+    public static int zone;
     static final double FEET_PER_METER = 3.28084;
 
     // Lens intrinsics
@@ -170,6 +170,7 @@ public class PrayersAuto extends LinearOpMode {
         /* Actually do something useful */
 
         waitForStart();
+
         if(tagOfInterest == null || tagOfInterest.id == LEFT ) {
             br =motorBackRight.getCurrentPosition();
             bl =motorBackLeft.getCurrentPosition();
@@ -177,26 +178,31 @@ public class PrayersAuto extends LinearOpMode {
             fl =motorFrontLeft.getCurrentPosition();
             telemetry.addData("Zone Left- One", 1);
             telemetry.update();
-         //  forward(1300);
-          //  strafeLeft(1300);
+          forward(1300);
+          strafeLeft(1300);
+          zone = 1;
         }
+
         else if(tagOfInterest.id == MIDDLE) {
             br =motorBackRight.getCurrentPosition();
             bl =motorBackLeft.getCurrentPosition();
             fr =motorFrontRight.getCurrentPosition();
             fl =motorFrontLeft.getCurrentPosition();
-          //  forward(1300);
+            forward(1300);
             telemetry.addData("Zone Middle- Two", 2);
             telemetry.update();
+            zone = 2;
 
         }
+
         else {
             br =motorBackRight.getCurrentPosition();
             bl =motorBackLeft.getCurrentPosition();
             fr =motorFrontRight.getCurrentPosition();
             fl =motorFrontLeft.getCurrentPosition();
-           // forward(1300);
-          //  strafeRight(1300);
+           forward(1300);
+           strafeRight(1300);
+           zone = 3;
             telemetry.addData("Zone Right- Three", 3);
             telemetry.update();
 
@@ -241,10 +247,10 @@ public class PrayersAuto extends LinearOpMode {
         motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        motorBackRight.setPower(1);
-        motorBackLeft.setPower(1);
-        motorFrontRight.setPower(1);
-        motorFrontLeft.setPower(1);
+        motorBackRight.setPower(.1);
+        motorBackLeft.setPower(.1);
+        motorFrontRight.setPower(.1);
+        motorFrontLeft.setPower(.1);
 
         while (motorBackLeft.isBusy() && motorBackRight.isBusy() && motorFrontLeft.isBusy() && motorFrontRight.isBusy()) {
         }

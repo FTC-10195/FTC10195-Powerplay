@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.archive.Scrimbot;
+package org.firstinspires.ftc.teamcode.Auto.RoadRunner.Scrimbot;
 import android.annotation.SuppressLint;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -19,7 +19,7 @@ public class clawServoTesterClassAyaam extends LinearOpMode {
         //hardware map calls
         Servo clawServo1 = hardwareMap.servo.get("clawOne");
 
-        Servo clawServo2 = hardwareMap.servo.get("clawTwo");
+      //  Servo clawServo2 = hardwareMap.servo.get("clawTwo");
 
         double clawServo1Position = 0;
 
@@ -56,15 +56,6 @@ public class clawServoTesterClassAyaam extends LinearOpMode {
             }
 
 
-            if (gamepad1.x && !previousXButton) {
-                clawServo2Position += .05;
-
-            }
-
-            if (gamepad1.b && !previousBButton) {
-                clawServo2Position -= .05;
-
-            }
 
             //falling edge detector, prevents the input from repeating during the loop
             previousRightBumper = gamepad1.right_bumper;

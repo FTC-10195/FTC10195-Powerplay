@@ -87,8 +87,8 @@ public class MecanumDrive  {
 
 public void drive(double upDown, double strafe, double turn) {
 
-    upDown = -upDown; // Remember, this is reversed!
-    strafe = strafe * 1.1; // Counteract imperfect strafing
+    upDown = upDown; // Remember, this is reversed!
+    strafe = -strafe * 1.1; // Counteract imperfect strafing
     turn =-turn;
 
 
@@ -106,8 +106,8 @@ public void drive(double upDown, double strafe, double turn) {
 
 }
 public void fieldDrive(double upDown, double strafe, double turn) {
-             upDown = -upDown; // Remember, this is reversed!
-             strafe = strafe * 1.1; // Counteract imperfect strafing
+             upDown = upDown; // Remember, this is reversed!
+             strafe = -strafe * 1.1; // Counteract imperfect strafing
              turn =-turn;
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio, but only when

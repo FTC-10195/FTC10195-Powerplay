@@ -3,13 +3,20 @@ package org.firstinspires.ftc.teamcode.Auto.AprilTags;
 import android.annotation.SuppressLint;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Auto.AprilTags.AprilTagDetectionPipeline;
+import org.firstinspires.ftc.teamcode.Auto.RoadRunner.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.Subsystems.SmithfieldBad.Claw;
+import org.firstinspires.ftc.teamcode.Subsystems.SmithfieldBad.LinearSlide;
+import org.firstinspires.ftc.teamcode.Subsystems.SmithfieldBad.Linkage;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -89,9 +96,11 @@ public class PrayersAuto extends LinearOpMode {
         motorBackRight = hardwareMap.dcMotor.get("br"); //reverse
         //   motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         //    motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+      //  motorBackRight.setDirection(DcMotorSimple.Direction.REVERSE);
+      //  motorFrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        motorBackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        motorFrontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         DcMotor.ZeroPowerBehavior zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE;
         motorBackRight.setZeroPowerBehavior(zeroPowerBehavior);
         motorBackLeft.setZeroPowerBehavior(zeroPowerBehavior);
@@ -108,7 +117,9 @@ public class PrayersAuto extends LinearOpMode {
         motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
+        LinearSlide slide = new LinearSlide(hardwareMap, telemetry);
+        Claw claw = new Claw(hardwareMap, telemetry);
+       // Linkage link = new Linkage(hardwareMap);
 
         while (!isStarted() && !isStopRequested()) {
             ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
@@ -169,51 +180,101 @@ public class PrayersAuto extends LinearOpMode {
 
         /* Actually do something useful */
 
+   //   SampleMecanumDrive drive  = new SampleMecanumDrive(hardwareMap);
+     // Trajectory rightTraj = drive.trajectoryBuilder(new Pose2d())
+     //     .strafeRight(10)
+     //     .forward(5)
+       //       .build();
+
+
         waitForStart();
+            if (tagOfInterest.id == LEFT) {
+                br = motorBackRight.getCurrentPosition();
+                bl = motorBackLeft.getCurrentPosition();
+                fr = motorFrontRight.getCurrentPosition();
+                fl = motorFrontLeft.getCurrentPosition();
+                telemetry.addData("Backright", br);
+                telemetry.addData("Front Right", fr);
+                telemetry.addData("Back Left", bl);
+                telemetry.addData("Front Left", fl);
+                telemetry.update();
+                forward(1300);
+                telemetry.addData("Backright", br);
+                telemetry.addData("Front Right", fr);
+                telemetry.addData("Back Left", bl);
+                telemetry.addData("Front Left", fl);
+                telemetry.update();
 
-        if(tagOfInterest == null || tagOfInterest.id == LEFT ) {
-            br =motorBackRight.getCurrentPosition();
-            bl =motorBackLeft.getCurrentPosition();
-            fr =motorFrontRight.getCurrentPosition();
-            fl =motorFrontLeft.getCurrentPosition();
-            telemetry.addData("Zone Left- One", 1);
-            telemetry.update();
-          forward(1300);
-          strafeLeft(1300);
-          zone = 1;
+                strafeLeft(1300);
+                telemetry.addData("Backright", br);
+                telemetry.addData("Front Right", fr);
+                telemetry.addData("Back Left", bl);
+                telemetry.addData("Front Left", fl);
+                telemetry.update();
+
+                telemetry.addData("Zone Left- One", 1);
+                telemetry.update();
+                // strafeLeft(2000);
+        /*  slide.slideMovement(true, false, false, false);
+          claw.clawMove(true, false);
+          slide.slideMovement(false, true, false, false);
+          strafeRight(2600);
+          forward(2000);
+          turnRight(50);
+          claw.clawMove(true, false);
+          forward(55);
+          claw.clawMove(false, true);
+          turnLeft(50);
+
+*/
+                zone = 1;
+            } else if (tagOfInterest.id == MIDDLE) {
+                br = motorBackRight.getCurrentPosition();
+                bl = motorBackLeft.getCurrentPosition();
+                fr = motorFrontRight.getCurrentPosition();
+                fl = motorFrontLeft.getCurrentPosition();
+                forward(1300);
+                telemetry.addData("Backright", br);
+                telemetry.addData("Front Right", fr);
+                telemetry.addData("Back Left", bl);
+                telemetry.addData("Front Left", fl);
+                telemetry.update();
+
+                telemetry.addData("Zone Middle- Two", 2);
+                telemetry.update();
+                zone = 2;
+
+            } else {
+                br = motorBackRight.getCurrentPosition();
+                bl = motorBackLeft.getCurrentPosition();
+                fr = motorFrontRight.getCurrentPosition();
+                fl = motorFrontLeft.getCurrentPosition();
+              //  drive.followTrajectory(rightTraj);
+                forward(1300);
+                telemetry.addData("Backright", br);
+                telemetry.addData("Front Right", fr);
+                telemetry.addData("Back Left", bl);
+                telemetry.addData("Front Left", fl);
+                telemetry.update();
+
+                strafeRight(1300);
+                telemetry.addData("Backright", br);
+                telemetry.addData("Front Right", fr);
+                telemetry.addData("Back Left", bl);
+                telemetry.addData("Front Left", fl);
+                telemetry.update();
+
+                telemetry.addData("Zone Right- Three", 3);
+                telemetry.update();
+
+
+            }
+
+
         }
-
-        else if(tagOfInterest.id == MIDDLE) {
-            br =motorBackRight.getCurrentPosition();
-            bl =motorBackLeft.getCurrentPosition();
-            fr =motorFrontRight.getCurrentPosition();
-            fl =motorFrontLeft.getCurrentPosition();
-            forward(1300);
-            telemetry.addData("Zone Middle- Two", 2);
-            telemetry.update();
-            zone = 2;
-
-        }
-
-        else {
-            br =motorBackRight.getCurrentPosition();
-            bl =motorBackLeft.getCurrentPosition();
-            fr =motorFrontRight.getCurrentPosition();
-            fl =motorFrontLeft.getCurrentPosition();
-           forward(1300);
-           strafeRight(1300);
-           zone = 3;
-            telemetry.addData("Zone Right- Three", 3);
-            telemetry.update();
-
-
-        }
-
-
-
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
-    }
+
 
     void tagToTelemetry(AprilTagDetection detection) {
         telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
@@ -331,4 +392,107 @@ public class PrayersAuto extends LinearOpMode {
         motorFrontRight.setPower(0);
         motorFrontLeft.setPower(0);
     }
+
+    public void turnRight(int distance){
+        motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        motorBackRight.setTargetPosition(-distance);
+        motorBackLeft.setTargetPosition(-distance);
+        motorFrontRight.setTargetPosition(distance);
+        motorFrontLeft.setTargetPosition(distance);
+
+        motorBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        motorBackRight.setPower(.1);
+        motorBackLeft.setPower(.1);
+        motorFrontRight.setPower(.1);
+        motorFrontLeft.setPower(.1);
+        while (motorBackLeft.isBusy() && motorBackRight.isBusy() && motorFrontLeft.isBusy() && motorFrontRight.isBusy()) {
+        }
+        motorBackRight.setPower(0);
+        motorBackLeft.setPower(0);
+        motorFrontRight.setPower(0);
+        motorFrontLeft.setPower(0);
+
+    }
+    public void turnLeft(int distance){
+        motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        motorBackRight.setTargetPosition(distance);
+        motorBackLeft.setTargetPosition(distance);
+        motorFrontRight.setTargetPosition(-distance);
+        motorFrontLeft.setTargetPosition(-distance);
+
+        motorBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        motorBackRight.setPower(.1);
+        motorBackLeft.setPower(.1);
+        motorFrontRight.setPower(.1);
+        motorFrontLeft.setPower(.1);
+        while (motorBackLeft.isBusy() && motorBackRight.isBusy() && motorFrontLeft.isBusy() && motorFrontRight.isBusy()) {
+        }
+        motorBackRight.setPower(0);
+        motorBackLeft.setPower(0);
+        motorFrontRight.setPower(0);
+        motorFrontLeft.setPower(0);
+
+    }
+    public void backward(int distance){
+        motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        motorBackRight.setTargetPosition(-distance);
+        motorBackLeft.setTargetPosition(-distance);
+        motorFrontRight.setTargetPosition(-distance);
+        motorFrontLeft.setTargetPosition(-distance);
+
+        motorBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        motorBackRight.setPower(.1);
+        motorBackLeft.setPower(.1);
+        motorFrontRight.setPower(.1);
+        motorFrontLeft.setPower(.1);
+        while (motorBackLeft.isBusy() && motorBackRight.isBusy() && motorFrontLeft.isBusy() && motorFrontRight.isBusy()) {
+        }
+        motorBackRight.setPower(0);
+        motorBackLeft.setPower(0);
+        motorFrontRight.setPower(0);
+        motorFrontLeft.setPower(0);
+
+    }
+
+
 }
+

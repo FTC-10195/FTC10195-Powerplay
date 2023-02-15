@@ -18,7 +18,7 @@ public class AutoScoring extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         LinearSlide slide = new LinearSlide(hardwareMap, telemetry);
-        Claw claw = new Claw(hardwareMap);
+        Claw claw = new Claw(hardwareMap, telemetry);
         Linkage link = new Linkage(hardwareMap);
 
         //all of the init stuff

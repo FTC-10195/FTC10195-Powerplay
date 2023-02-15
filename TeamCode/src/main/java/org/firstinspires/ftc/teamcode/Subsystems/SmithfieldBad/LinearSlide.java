@@ -24,8 +24,8 @@ public class LinearSlide {
     DcMotorEx linearSlide2;
     //TODO TUNE THESE VALUES
     public static int TALL_POLE = 6000;
-    public static int MEDIUM_POLE = 0;
-    public static int SHORT_POLE = 0;
+    public static int MEDIUM_POLE = 3500;
+    public static int SHORT_POLE = 300;
     public static int MAX_VALUE_V1;
     public static int GROUND = 0;
 
@@ -60,12 +60,14 @@ public void slideStates(boolean up, boolean down, boolean left, boolean right, b
                 if(manDown || manUp) {
                     sStates = slideStates.MANUAL;
                 }
+                break;
 
             case MANUAL:
                 manualMove(manUp, manUp);
                 if(up || down || left || right) {
                     sStates = slideStates.AUTO;
                 }
+                break;
     }
 }
 
@@ -92,11 +94,14 @@ public void slideMovement(boolean up, boolean down, boolean left, boolean right)
             currentPosition = linearSlide.getCurrentPosition();
 
 
+           // if (up && -linearSlide.getCurrentPosition() <= 7500) {
             if (up) {
                 linearSlide.setPower(1);
                 linearSlide2.setPower(1);
+
             }
-            else if (down) {
+          //  else if (down && -linearSlide.getCurrentPosition() >= 0) {
+              else if(down) {
                 linearSlide.setPower(-1);
                 linearSlide2.setPower(-1);
             }

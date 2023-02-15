@@ -13,7 +13,10 @@ public class Linkage {
     public Linkage(HardwareMap hardwareMap) {
          linkageServo  = hardwareMap.servo.get("linkageS");
          linkageServo1 = hardwareMap.servo.get("linkageS1");
-        linkageServo.setPosition(INTAKE);
+         linkageServo1.setDirection(Servo.Direction.REVERSE);
+        linkageServo.setPosition(OUTTAKE);
+
+        linkageServo1.setPosition(OUTTAKE);
     }
 
     public enum STATES  {
@@ -30,15 +33,19 @@ public class Linkage {
                 if(rrb) {
                     linkageStates = STATES.OUT;
                 }
+                break;
             case OUT:
                 movement(false, true);
                 if(brr) {
                     linkageStates = STATES.IN;
                 }
+                break;
             case MANUAL:
                 manualMovement(brr, rrb);
+                break;
 
         }
+
     }
 
     public void movement(boolean in, boolean out) {

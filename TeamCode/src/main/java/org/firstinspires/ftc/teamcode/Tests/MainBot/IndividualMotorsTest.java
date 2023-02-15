@@ -39,6 +39,7 @@ public class IndividualMotorsTest extends LinearOpMode {
                         dt.motorBackRight.setPower(0);
                         dt.motorBackLeft.setPower(0);
                         telemetry.addLine("Running Motor: Front Left");
+                        telemetry.addData("Encoder: ", dt.motorFrontLeft.getCurrentPosition());
                     } else if(gamepad1.y) {
                         dt.motorFrontRight.setPower(.3);
                         dt.motorFrontLeft.setPower(0);
@@ -46,6 +47,8 @@ public class IndividualMotorsTest extends LinearOpMode {
                         dt.motorBackLeft.setPower(0);
 
                         telemetry.addLine("Running Motor: Front Right");
+                        telemetry.addData("Encoder: ", dt.motorFrontRight.getCurrentPosition());
+
                     } else if(gamepad1.b) {
                         dt.motorBackRight.setPower(.3);
                         dt.motorFrontLeft.setPower(0);
@@ -53,6 +56,8 @@ public class IndividualMotorsTest extends LinearOpMode {
                         dt.motorBackLeft.setPower(0);
 
                         telemetry.addLine("Running Motor: Rear Right");
+                        telemetry.addData("Encoder: ", dt.motorBackRight.getCurrentPosition());
+
 
                     } else if(gamepad1.a) {
                         dt.motorBackLeft.setPower(.3);
@@ -60,6 +65,8 @@ public class IndividualMotorsTest extends LinearOpMode {
                         dt.motorFrontRight.setPower(0);
                         dt.motorBackRight.setPower(0);
                         telemetry.addLine("Running Motor: Rear Left");
+                        telemetry.addData("Encoder: ", dt.motorBackLeft.getCurrentPosition());
+
                     } else {
                         dt.motorFrontLeft.setPower(0);
                         dt.motorFrontRight.setPower(0);

@@ -8,6 +8,7 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -31,6 +32,9 @@ public class PrayersAuto extends LinearOpMode {
     DcMotor motorBackLeft;
     DcMotor motorFrontRight;
     DcMotor motorBackRight;
+
+    DcMotorEx linearSlide;
+    DcMotorEx linearSlide2;
     int br;
     int bl;
     int fr;
@@ -117,6 +121,20 @@ public class PrayersAuto extends LinearOpMode {
         motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        linearSlide = hardwareMap.get(DcMotorEx.class, "ls");
+        linearSlide2 = hardwareMap.get(DcMotorEx.class, "ls2");
+
+        //Sets motor
+        linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        linearSlide.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
+        linearSlide2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        linearSlide2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlide2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         LinearSlide slide = new LinearSlide(hardwareMap, telemetry);
         Claw claw = new Claw(hardwareMap, telemetry);
        // Linkage link = new Linkage(hardwareMap);
@@ -206,11 +224,13 @@ public class PrayersAuto extends LinearOpMode {
                 telemetry.update();
 
                 strafeLeft(1300);
+                position(2500);
                 telemetry.addData("Backright", br);
                 telemetry.addData("Front Right", fr);
                 telemetry.addData("Back Left", bl);
                 telemetry.addData("Front Left", fl);
                 telemetry.update();
+
 
                 telemetry.addData("Zone Left- One", 1);
                 telemetry.update();
@@ -492,6 +512,23 @@ public class PrayersAuto extends LinearOpMode {
         motorFrontLeft.setPower(0);
 
     }
+    private void position(int pole) {
+
+
+
+        linearSlide.setTargetPosition(pole);
+        linearSlide.setTargetPositionTolerance(50);
+        linearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        linearSlide.setPower(1);
+
+        linearSlide2.setTargetPosition(pole);
+        linearSlide2.setTargetPositionTolerance(50);
+        linearSlide2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        linearSlide2.setPower(1);
+
+
+    }
+
 
 
 }

@@ -85,7 +85,7 @@ public class MecanumDrive  {
         telemetry = telemetry1;
     }
 
-public void drive(double upDown, double strafe, double turn) {
+public void drive(double upDown, double strafe, double turn, boolean slowMode) {
 
     upDown = upDown; // Remember, this is reversed!
     strafe = -strafe * 1.1; // Counteract imperfect strafing
@@ -102,6 +102,14 @@ public void drive(double upDown, double strafe, double turn) {
             motorBackLeft.setPower(backLeftPower);
             motorFrontRight.setPower(frontRightPower);
             motorBackRight.setPower(backRightPower);
+
+            if(slowMode) {
+                motorFrontLeft.setPower(frontLeftPower/2);
+                motorBackLeft.setPower(backLeftPower/2);
+                motorFrontRight.setPower(frontRightPower/2);
+                motorBackRight.setPower(backRightPower/2);
+
+            }
 
 
 }

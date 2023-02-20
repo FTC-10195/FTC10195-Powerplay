@@ -23,7 +23,7 @@ public class LinearSlide {
     int currentPosition;
     DcMotorEx linearSlide2;
     //TODO TUNE THESE VALUES
-    public static int TALL_POLE = 6000;
+    public static int TALL_POLE = 3878;
     public static int MEDIUM_POLE = 3500;
     public static int SHORT_POLE = 300;
     public static int MAX_VALUE_V1;

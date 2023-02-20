@@ -24,8 +24,8 @@ public class Claw {
     }
 
     //TODO CHANGE THESE VALUES TO BE BETTER
-    public final double OPEN_CLAW = 0;
-    public final double CLOSED_CLAW = .55;
+    public final double OPEN_CLAW = 0.2;
+    public final double CLOSED_CLAW = .6 ;
 
 public enum claw {
     OPEN,

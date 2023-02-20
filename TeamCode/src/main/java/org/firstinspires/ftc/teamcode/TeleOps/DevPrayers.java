@@ -17,7 +17,7 @@ public class DevPrayers extends LinearOpMode {
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
-          mecanumDrive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+        //  mecanumDrive.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
            // bar.rollerRotate(gamepad1.a, gamepad1.b);
         }
 

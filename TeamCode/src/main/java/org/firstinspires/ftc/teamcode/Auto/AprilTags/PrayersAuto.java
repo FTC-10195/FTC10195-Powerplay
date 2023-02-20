@@ -224,7 +224,8 @@ public class PrayersAuto extends LinearOpMode {
                 telemetry.update();
 
                 strafeLeft(1300);
-                position(2500);
+             //   position(2500);
+             //   forward(650);
                 telemetry.addData("Backright", br);
                 telemetry.addData("Front Right", fr);
                 telemetry.addData("Back Left", bl);
@@ -277,8 +278,8 @@ public class PrayersAuto extends LinearOpMode {
                 telemetry.addData("Front Left", fl);
                 telemetry.update();
 
-                strafeRight(1300);
-                telemetry.addData("Backright", br);
+strafeLeft(-1300);
+telemetry.addData("Backright", br);
                 telemetry.addData("Front Right", fr);
                 telemetry.addData("Back Left", bl);
                 telemetry.addData("Front Left", fl);
